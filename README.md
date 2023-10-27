@@ -1,1 +1,1 @@
-# ReactProject
+# .NET project
