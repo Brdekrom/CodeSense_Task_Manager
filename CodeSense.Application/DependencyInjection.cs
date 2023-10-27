@@ -1,6 +1,16 @@
-﻿namespace CodeSense.Application;
+﻿using CodeSense.Application.Abstractions;
+using CodeSense.Application.Services;
+using Microsoft.Extensions.DependencyInjection;
 
-public class DependencyInjection
+namespace CodeSense.Application;
+
+public static class DependencyInjection
 {
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(IEntityManagementService<>), typeof(EntityManagementService<>))
+                .AddTransient<IProjectService, ProjectService>();
 
+        return services;
+    }
 }

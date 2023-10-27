@@ -3,11 +3,11 @@ using CodeSense.Infrastructure.Persistence;
 
 namespace CodeSense.Domain.Repositories;
 
-public class EfCoreRepository<T> : IRepository<T> where T : EntityBase
+public class Repository<T> : IRepository<T> where T : EntityBase
 {
     private readonly CodeSenseDbContext _context;
 
-    public EfCoreRepository(CodeSenseDbContext context)
+    public Repository(CodeSenseDbContext context)
     {
         _context = context;
     }

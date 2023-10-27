@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Wx7bn+S4PA7oRlg8L2HmuViwpPb7deww/vigpUXxu29xkW4L7Hlc4pZC/k66gldbQP/co17NZeoVMzmlyHwFPg==",
+  "dgSpecHash": "NcLxzkfXDBxkft0RH7aGS7ymOGIa81OiO334nra7KmDWIAzJJQZmZQ3Pn79ux1539R3IKTWt85ij8hK/REgm6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\brdek\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
