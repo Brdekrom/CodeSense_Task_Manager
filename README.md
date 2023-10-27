@@ -3,5 +3,6 @@
 27/10/2023 = 
 { 
 test projects still needs to be created,
-automapper needs to be fixed
+automapper needs to be fixed,
+ProjectService needs a cleanup
 }
