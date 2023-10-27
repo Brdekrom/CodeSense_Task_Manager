@@ -10,10 +10,10 @@ public static class DbInitializer
     {
         if (context.Employees.Any())
         {
-            return;  // DB has been seeded
+            return;
         }
 
-        var levelNames = new[] { "Junior", "Medior", "Senior", "Architect", "PM" };
+        var levelNames = new[] { "Junior Developer", "Medior Developer", "Senior Developer", "Architect", "PM" };
 
         var faker = new Faker<Employee>()
             .RuleFor(o => o.Name, f => f.Name.FirstName())

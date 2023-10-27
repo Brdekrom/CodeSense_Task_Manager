@@ -13,7 +13,7 @@ public class EmployeeValidator : AbstractValidator<Employee>
 
         RuleFor(x => x.Level)
             .NotEmpty().WithMessage("Level is required.")
-            .Must(x => new[] { "Junior", "Medior", "Senior", "Architect", "PM" }.Contains(x))
+            .Must(x => new[] { "Junior Developer", "Medior Developer", "Senior Developer", "Architect", "PM" }.Contains(x))
             .WithMessage("Level must be one of the following: Junior, Medior, Senior, Architect, PM");
 
         RuleFor(x => x.Cost)
