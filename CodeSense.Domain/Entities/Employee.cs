@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CodeSense.Domain.Abstractions;
 
 namespace CodeSense.Domain.Entities;
 
-public class Employee
+public class Employee : EntityBase
 {
     public string Name { get; set; }
     public string Level { get; set; }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CodeSense.Domain.Abstractions;
 
 namespace CodeSense.Domain.Entities;
 
-public class Requirement
+public class Requirement : EntityBase
 {
     public string Level { get; set; }
     public int Amount { get; set; }
