@@ -71,9 +71,9 @@ public class ProjectService : IProjectService
     private static string GetNextHigherLevel(string currentLevel)
         => currentLevel switch
         {
-            "Junior developer" => "Medior developer",
-            "Medior developer" => "Senior developer",
-            "Senior developer" => string.Empty,
+            "Junior Developer" => "Medior Developer",
+            "Medior Developer" => "Senior Developer",
+            "Senior Developer" => string.Empty,
             "Architect" => "Senior developer",
             _ => string.Empty
         };

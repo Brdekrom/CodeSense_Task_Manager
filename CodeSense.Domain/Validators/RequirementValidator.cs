@@ -9,7 +9,7 @@ public class RequirementValidator : AbstractValidator<Requirement>
     {
         RuleFor(x => x.Level)
             .NotEmpty().WithMessage("Level is required.")
-            .Must(x => new[] { "Architect", "PM", "Senior developer", "Junior developer" }.Contains(x))
+            .Must(x => new[] { "Architect", "PM", "Senior Developer", "Medior Developer", "Junior Developer" }.Contains(x))
             .WithMessage("Level must be one of the following: Architect, PM, Senior developer, Junior developer");
 
         RuleFor(x => x.Amount)

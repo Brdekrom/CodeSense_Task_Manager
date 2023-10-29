@@ -32,11 +32,11 @@ public class ProjectManagementController : ControllerBase
         var validationResult = _projectValidator.Validate(project);
         if (!validationResult.IsValid)
         {
-            return BadRequest(validationResult);
+            return BadRequest(validationResult.Errors);
         }
         var selectedEmployees = _projectService.RetrieveAvailableEmployees(project.Requirements);
 
-        if (selectedEmployees.Any())
+        if (!selectedEmployees.Any())
         {
             return NotFound();
         }

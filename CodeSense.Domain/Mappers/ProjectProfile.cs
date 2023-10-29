@@ -8,7 +8,8 @@ public class ProjectProfile : Profile
 {
     public ProjectProfile()
     {
-        CreateMap<Project, ProjectDTO>();
-        CreateMap<ProjectDTO, Project>();
+        CreateMap<Project, ProjectDTO>()
+            .ForMember(dest => dest.Requirements, opt => opt.MapFrom(src => src.Requirements))
+            .ReverseMap();
     }
 }
