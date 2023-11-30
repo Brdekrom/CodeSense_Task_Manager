@@ -1,13 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "k4bF29qLRcyb5I7iq7QeGBL3Hj6bXqHApL6C7rTx8pOW0UChFUvx9nDhgCBwQM7k+oPQfKvM6y3WBSaAgapEaw==",
+  "dgSpecHash": "1ydCtFXWVQiOUZtLRbdEbiRWGqRpgTCdwLc9mBDnzSWClp1WoXUA+Ncxya7cks3GP5lWJ4kICzsQkmlndLntvA==",
   "success": true,
   "projectFilePath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\brdek\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",

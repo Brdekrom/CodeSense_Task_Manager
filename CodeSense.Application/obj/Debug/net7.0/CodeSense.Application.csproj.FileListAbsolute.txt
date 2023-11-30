@@ -15,3 +15,4 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Application\obj\Deb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Application\obj\Debug\net7.0\refint\CodeSense.Application.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Application\obj\Debug\net7.0\CodeSense.Application.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Application\obj\Debug\net7.0\ref\CodeSense.Application.dll
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Application\obj\Debug\net7.0\CodeSense.Application.sourcelink.json

@@ -26,7 +26,7 @@ public class ProjectManagementController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] ProjectDTO dTO)
+    public async Task<IActionResult> PostAsync([FromBody] ProjectDTO dTO)
     {
         var project = _mapper.Map<Project>(dTO);
         var validationResult = _projectValidator.Validate(project);
@@ -34,7 +34,7 @@ public class ProjectManagementController : ControllerBase
         {
             return BadRequest(validationResult.Errors);
         }
-        var selectedEmployees = _projectService.RetrieveAvailableEmployees(project.Requirements);
+        var selectedEmployees = await _projectService.RetrieveAvailableEmployeesAsync(project.Requirements);
 
         if (!selectedEmployees.Any())
         {

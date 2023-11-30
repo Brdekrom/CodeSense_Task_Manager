@@ -13,3 +13,4 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Infrastructure\obj\
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Infrastructure\obj\Debug\net7.0\refint\CodeSense.Infrastructure.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Infrastructure\obj\Debug\net7.0\CodeSense.Infrastructure.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Infrastructure\obj\Debug\net7.0\ref\CodeSense.Infrastructure.dll
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Infrastructure\obj\Debug\net7.0\CodeSense.Infrastructure.sourcelink.json

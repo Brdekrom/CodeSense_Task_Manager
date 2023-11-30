@@ -1,6 +1,7 @@
 ﻿namespace CodeSense.Application.Services;
 
 using CodeSense.Application.Abstractions;
+using CodeSense.Domain.Common.Constants;
 using CodeSense.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,52 +15,39 @@ public class ProjectService : IProjectService
         _employeeService = employeeService;
     }
 
-    public List<Employee> RetrieveAvailableEmployees(List<Requirement> requirements)
+    public async Task<List<Employee>> RetrieveAvailableEmployeesAsync(List<Requirement> requirements)
     {
-        var availableEmployees = GetAvailableEmployees();
+        var employeesByLevel = await GetEmployeesByLevelAsync(await GetAvailableEmployeesAsync());
 
-        var employeesByLevel = availableEmployees
-            .GroupBy(employee => employee.Level)
-            .ToDictionary(x => x.Key, x => x.ToList());
-
-        var selectedEmployees = new List<Employee>();
+        var employeeList = new List<Employee>();
 
         foreach (var requirement in requirements)
         {
-            var requiredLevel = requirement.Level;
-            var requiredAmount = requirement.Amount;
-
-            if (employeesByLevel.ContainsKey(requiredLevel))
+            if (employeesByLevel.ContainsKey(requirement.Level))
             {
-                var employeesOfLevel = employeesByLevel[requiredLevel];
+                var employeesOfLevel = employeesByLevel[requirement.Level];
 
-                var toTake = Math.Min(employeesOfLevel.Count, requiredAmount);
-                selectedEmployees.AddRange(employeesOfLevel.Take(toTake));
+                var toTake = Math.Min(employeesOfLevel.Count, requirement.Amount);
+                employeeList.AddRange(employeesOfLevel.Take(toTake));
                 employeesOfLevel.RemoveRange(0, toTake);
-                requiredAmount -= toTake;
+                requirement.Amount -= toTake;
             }
 
-            while (requiredAmount > 0)
+            if (requirement.Amount > 0)
             {
-                var nextHigherLevel = GetNextHigherLevel(requiredLevel);
-
-                if (string.IsNullOrEmpty(nextHigherLevel) || !employeesByLevel.ContainsKey(nextHigherLevel))
-                {
-                    break;
-                }
-
-                var higherLevelEmployees = employeesByLevel[nextHigherLevel];
-                var toTake = Math.Min(higherLevelEmployees.Count, requiredAmount);
-                selectedEmployees.AddRange(higherLevelEmployees.Take(toTake));
-                higherLevelEmployees.RemoveRange(0, toTake);
-                requiredAmount -= toTake;
+                GetNextHigherLevel(requirement.Level, requirement.Amount, employeesByLevel, employeeList);
             }
         }
 
-        return selectedEmployees;
+        return employeeList;
     }
 
-    private List<Employee> GetAvailableEmployees()
+    private async Task<IDictionary<string, List<Employee>>> GetEmployeesByLevelAsync(IList<Employee> employees)
+    => employees
+            .GroupBy(employee => employee.Level)
+            .ToDictionary(x => x.Key, x => x.ToList());
+
+    private async Task<List<Employee>> GetAvailableEmployeesAsync()
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Now);
         return _employeeService
@@ -68,13 +56,31 @@ public class ProjectService : IProjectService
                             .ToList();
     }
 
-    private static string GetNextHigherLevel(string currentLevel)
+    private void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)
+    {
+        while (requiredAmount > 0)
+        {
+            var nextHigherLevel = NextHigherLevel(requiredLevel);
+
+            if (string.IsNullOrEmpty(nextHigherLevel) || !employeesByLevel.ContainsKey(nextHigherLevel))
+            {
+                break;
+            }
+
+            var higherLevelEmployees = employeesByLevel[nextHigherLevel];
+            var toTake = Math.Min(higherLevelEmployees.Count, requiredAmount);
+            employeeList.AddRange(higherLevelEmployees.Take(toTake));
+            higherLevelEmployees.RemoveRange(0, toTake);
+            requiredAmount -= toTake;
+        }
+    }
+
+    private static string NextHigherLevel(string currentLevel)
         => currentLevel switch
         {
-            "Junior Developer" => "Medior Developer",
-            "Medior Developer" => "Senior Developer",
-            "Senior Developer" => string.Empty,
-            "Architect" => "Senior developer",
+            EmployeeLevel.Junior => EmployeeLevel.Medior,
+            EmployeeLevel.Medior => EmployeeLevel.Senior,
+            EmployeeLevel.Senior => EmployeeLevel.Architect,
             _ => string.Empty
         };
 }

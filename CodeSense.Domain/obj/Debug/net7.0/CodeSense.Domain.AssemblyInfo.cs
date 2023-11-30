@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeSense.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+847db075598e45fdd6a7741d484a426f3e89a50e")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeSense.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeSense.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,13 +1,12 @@
-﻿using CodeSense.Domain.Abstractions;
-using CodeSense.Infrastructure.Persistence;
+﻿using CodeSense.Infrastructure.Persistence;
 
-namespace CodeSense.Domain.Repositories;
+namespace CodeSense.Infrastructure.Repositories;
 
 public class Repository<T> : IRepository<T> where T : EntityBase
 {
     private readonly CodeSenseDbContext _context;
 
-    public Repository(CodeSenseDbContext context)
+    internal Repository(CodeSenseDbContext context)
     {
         _context = context;
     }

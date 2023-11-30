@@ -2,15 +2,13 @@ using CodeSense.Application;
 using CodeSense.Domain;
 using CodeSense.Infrastructure;
 using CodeSense.Infrastructure.Data;
-using CodeSense.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-
 builder.Services.AddInMemoryDatabase();
-builder.Services.AddApplicationServices();
 builder.Services.AddDomainLayer();
+builder.Services.AddApplicationServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSwaggerGen(c =>
@@ -20,13 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<CodeSenseDbContext>();
-    DbInitializer.Seed(context);
-}
+app.Services.SeedDatabase();
 
 if (app.Environment.IsDevelopment())
 {

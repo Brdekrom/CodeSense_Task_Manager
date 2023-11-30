@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeSense.Domain\CodeSense.Domain.csproj" />
+    <ProjectReference Include="..\CodeSense.Application\CodeSense.Application.csproj" />
+   
   </ItemGroup>
 
 </Project>

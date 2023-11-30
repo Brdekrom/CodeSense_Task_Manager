@@ -1,12 +1,22 @@
 ﻿using Bogus;
 using CodeSense.Domain.Entities;
 using CodeSense.Infrastructure.Persistence;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeSense.Infrastructure.Data;
 
 public static class DbInitializer
 {
-    public static void Seed(CodeSenseDbContext context)
+    public static void SeedDatabase(this IServiceProvider serviceProvider)
+    {
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<CodeSenseDbContext>();
+            Seed(context);
+        }
+    }
+
+    internal static void Seed(CodeSenseDbContext context)
     {
         if (context.Employees.Any())
         {

@@ -1,4 +1,6 @@
-﻿namespace CodeSense.Domain.Abstractions;
+﻿using CodeSense.Domain.Abstractions;
+
+namespace CodeSense.Application.Abstractions;
 
 public interface IRepository<T> where T : EntityBase
 {

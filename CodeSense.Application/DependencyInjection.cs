@@ -9,7 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IEntityManagementService<>), typeof(EntityManagementService<>))
-                .AddTransient<IProjectService, ProjectService>();
+                .AddScoped<IProjectService, ProjectService>()
+                .AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         return services;
     }

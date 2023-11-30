@@ -45,3 +45,4 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\Bogus.dll
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.sourcelink.json

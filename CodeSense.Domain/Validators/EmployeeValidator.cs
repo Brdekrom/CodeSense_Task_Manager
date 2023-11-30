@@ -1,4 +1,5 @@
-﻿using CodeSense.Domain.Entities;
+﻿using CodeSense.Domain.Common.Constants;
+using CodeSense.Domain.Entities;
 using FluentValidation;
 
 namespace CodeSense.Domain.Validators;
@@ -13,8 +14,8 @@ public class EmployeeValidator : AbstractValidator<Employee>
 
         RuleFor(x => x.Level)
             .NotEmpty().WithMessage("Level is required.")
-            .Must(x => new[] { "Junior Developer", "Medior Developer", "Senior Developer", "Architect", "PM" }.Contains(x))
-            .WithMessage("Level must be one of the following: Junior, Medior, Senior, Architect, PM");
+            .Must(x => new[] { EmployeeLevel.Junior, EmployeeLevel.Medior, EmployeeLevel.Senior, EmployeeLevel.Architect, EmployeeLevel.PM }.Contains(x))
+            .WithMessage("Level must be one of the following: Junior Developer, Medior Developer, Senior Developer, Architect, PM");
 
         RuleFor(x => x.Cost)
             .GreaterThanOrEqualTo(1).WithMessage("Cost must be zero or greater.");
