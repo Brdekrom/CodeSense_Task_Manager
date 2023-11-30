@@ -11,7 +11,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "CodeSense.Application": "1.0.0",
-          "CodeSense.Domain": "1.0.0",
+          "CodeSense.Infrastructure": "1.0.0",
           "FluentValidation.AspNetCore": "11.3.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.5.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "6.5.0"
@@ -195,8 +195,7 @@
       },
       "CodeSense.Application/1.0.0": {
         "dependencies": {
-          "CodeSense.Domain": "1.0.0",
-          "CodeSense.Infrastructure": "1.0.0"
+          "CodeSense.Domain": "1.0.0"
         },
         "runtime": {
           "CodeSense.Application.dll": {}
@@ -215,7 +214,7 @@
       "CodeSense.Infrastructure/1.0.0": {
         "dependencies": {
           "Bogus": "34.0.2",
-          "CodeSense.Domain": "1.0.0",
+          "CodeSense.Application": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.13",
           "Microsoft.EntityFrameworkCore.InMemory": "7.0.13"
         },

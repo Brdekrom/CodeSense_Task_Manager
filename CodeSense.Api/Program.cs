@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-app.Services.SeedDatabase();
+DbInitializer.SeedDatabase(app.Services);
 
 if (app.Environment.IsDevelopment())
 {

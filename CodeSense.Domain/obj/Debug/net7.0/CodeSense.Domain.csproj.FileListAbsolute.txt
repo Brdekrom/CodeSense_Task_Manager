@@ -6,8 +6,8 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\ne
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.AssemblyInfoInputs.cache
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.AssemblyInfo.cs
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.csproj.CoreCompileInputs.cache
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.sourcelink.json
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\refint\CodeSense.Domain.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\ref\CodeSense.Domain.dll
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Domain\obj\Debug\net7.0\CodeSense.Domain.sourcelink.json

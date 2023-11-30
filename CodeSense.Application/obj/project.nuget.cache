@@ -1,25 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ISMBL8ji5dGfUreURZ/m28CJn7jVrmOwTlFV7LvVQfvOQy4Ok+FkRIm8PDjNxhmvuZUgY0eBG2xdG4xclEh2Og==",
+  "dgSpecHash": "AfjEE5A2Qzv/uVPpa9DrXDOK3Ty5clzgUIrbc+2xqcyv4eBX47USAYWBdAgiyMVAZhWLVZptmzooG7Pa8q2kkg==",
   "success": true,
   "projectFilePath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Application\\CodeSense.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brdek\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\bogus\\34.0.2\\bogus.34.0.2.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.13\\microsoft.entityframeworkcore.inmemory.7.0.13.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
-    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
+    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

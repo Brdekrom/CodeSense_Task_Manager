@@ -5,6 +5,9 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Api.runtimeconfig.json
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Api.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Api.pdb
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\Bogus.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\FluentValidation.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
@@ -19,8 +22,8 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Domain.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Infrastructure.dll
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Application.pdb
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Domain.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Infrastructure.pdb
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\CodeSense.Domain.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.csproj.AssemblyReference.cache
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.AssemblyInfoInputs.cache
@@ -28,13 +31,14 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.csproj.CoreCompileInputs.cache
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.sourcelink.json
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets\msbuild.CodeSense.Api.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets\msbuild.build.CodeSense.Api.props
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.CodeSense.Api.props
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.CodeSense.Api.props
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets.pack.json
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets.build.json
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\staticwebassets.development.json
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\scopedcss\bundle\CodeSense.Api.styles.css
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.csproj.CopyComplete
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.dll
@@ -42,7 +46,3 @@ C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.pdb
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.genruntimeconfig.cache
 C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\ref\CodeSense.Api.dll
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.dll
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\bin\Debug\net7.0\Bogus.dll
-C:\Users\brdek\source\repos\CodeSense Task Manager\CodeSense.Api\obj\Debug\net7.0\CodeSense.Api.sourcelink.json

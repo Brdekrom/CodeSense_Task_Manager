@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeSense.Infrastructure.Persistence;
 
-internal class CodeSenseDbContext : DbContext
+public class CodeSenseDbContext : DbContext
 {
     public CodeSenseDbContext(DbContextOptions<CodeSenseDbContext> options)
         : base(options)

@@ -383,8 +383,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "CodeSense.Domain": "1.0.0",
-          "CodeSense.Infrastructure": "1.0.0"
+          "CodeSense.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/CodeSense.Application.dll": {}
@@ -413,6 +412,7 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "Bogus": "34.0.2",
+          "CodeSense.Application": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.13",
           "Microsoft.EntityFrameworkCore.InMemory": "7.0.13"
         },
@@ -1042,7 +1042,7 @@
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "CodeSense.Application >= 1.0.0",
-      "CodeSense.Domain >= 1.0.0",
+      "CodeSense.Infrastructure >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 6.5.0",
       "Swashbuckle.AspNetCore.SwaggerUI >= 6.5.0"
@@ -1078,8 +1078,8 @@
             "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Application\\CodeSense.Application.csproj": {
               "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Application\\CodeSense.Application.csproj"
             },
-            "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj": {
-              "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj"
+            "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj"
             }
           }
         }

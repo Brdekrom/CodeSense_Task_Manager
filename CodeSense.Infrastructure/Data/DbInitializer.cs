@@ -7,16 +7,14 @@ namespace CodeSense.Infrastructure.Data;
 
 public static class DbInitializer
 {
-    public static void SeedDatabase(this IServiceProvider serviceProvider)
+    public static void SeedDatabase(IServiceProvider serviceProvider)
     {
-        using (var scope = serviceProvider.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<CodeSenseDbContext>();
-            Seed(context);
-        }
+        using var scope = serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<CodeSenseDbContext>();
+        Seed(context);
     }
 
-    internal static void Seed(CodeSenseDbContext context)
+    private static void Seed(CodeSenseDbContext context)
     {
         if (context.Employees.Any())
         {

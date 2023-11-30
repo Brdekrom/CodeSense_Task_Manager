@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeSense.Domain\CodeSense.Domain.csproj" />
-    <ProjectReference Include="..\CodeSense.Infrastructure\CodeSense.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
