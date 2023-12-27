@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+// Import the variables using @use
+@use 'variables' as vars
+// In styles.scss or styles.sass
+@import '~bootstrap/dist/css/bootstrap.min.css'
+
+
+html
+  font-family: 'Roboto Mono', monospace
+
+// Apply the body styles
+body
+  background-color: vars.$background-color
+  color: vars.$text-color
+  font-size: 16px
+  margin: 0
+  padding: 0
+
+// Use the yellow color for elements with the .yellow-span class
+.yellow-span
+  color: vars.$yellow
