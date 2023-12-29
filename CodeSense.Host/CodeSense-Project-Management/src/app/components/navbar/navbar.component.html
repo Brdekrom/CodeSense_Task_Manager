@@ -12,16 +12,16 @@
           <a class="nav-link active" routerLink="/home" aria-current="page">Home</a>
         </li>
         
-        @if(!(_auth.IsAuthenticated | async))
+        @if(!(_auth.isAuthenticated$ | async))
         {
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Log in</a>
+          <a class="nav-link" (click) ="_auth.loginWithRedirect()">Log in</a>
         </li>
         }
         @else
         {
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Log out</a>
+            <a class="nav-link" (click) = "_auth.logout()">Log out</a>
           </li>
         }
 

@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CodeSense-Project-Management:build:production"
+              "buildTarget": "CodeSense-Project-Management:build:production"
             },
             "development": {
-              "browserTarget": "CodeSense-Project-Management:build:development"
+              "buildTarget": "CodeSense-Project-Management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CodeSense-Project-Management:build"
+            "buildTarget": "CodeSense-Project-Management:build"
           }
         },
         "test": {

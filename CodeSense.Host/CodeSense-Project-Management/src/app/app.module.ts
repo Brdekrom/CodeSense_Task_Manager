@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProjectInputComponent } from './components/project-input/project-input.component';
-import { LoginComponent } from './components/login/login.component';
+import { ContactComponent } from './components/contact/contact.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthModule } from '@auth0/auth0-angular';
 
@@ -15,7 +15,7 @@ import { AuthModule } from '@auth0/auth0-angular';
     AppComponent,
     HomeComponent,
     ProjectInputComponent,
-    LoginComponent,
+    ContactComponent,
     NavbarComponent,
   ],
   imports: [
