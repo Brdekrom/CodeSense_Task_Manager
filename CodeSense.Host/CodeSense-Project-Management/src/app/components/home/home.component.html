@@ -1,13 +1,27 @@
-<div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <h2>Welcome to CS Project Manager</h2>
-        <p>This is a brief introduction to the application...</p>
-        <!-- Additional introduction content goes here -->
+<!-- app.component.html -->
+<div class="container-fluid h-100">
+    <div class="row h-100">
+      <!-- Left side (2 parts, stacked, each taking half the height) -->
+      <div class="col-md-8 d-flex flex-column">
+        <div class="row flex-grow-1">
+          <div class="col d-flex align-items-center justify-content-center left-part">
+            <p>Left part 1 content...</p>
+          </div>
+        </div>
+        <div class="row flex-grow-1">
+          <div class="col d-flex align-items-center justify-content-center left-part">
+            <p>Left part 2 content...</p>
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <login></login>
+      
+      <!-- Right side (1 part) -->
+      <div class="col-md-4 d-flex align-items-center justify-content-center right-part">
+        <login></login> <!-- Assuming 'app-login' is your login component selector -->
       </div>
     </div>
   </div>
+  
+  
+  
   

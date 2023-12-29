@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProjectInputComponent } from './components/project-input/project-input.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomeComponent,
     ProjectInputComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+
+    AuthModule.forRoot({
+      domain: 'dev-xlkommxvsey67l3c.us.auth0.com',
+      clientId: '2ZZ0yuI2hpDEA7UuVIiVP61V2I7ry70L',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
