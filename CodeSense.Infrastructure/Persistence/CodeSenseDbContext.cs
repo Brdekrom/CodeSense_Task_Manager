@@ -3,13 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeSense.Infrastructure.Persistence;
 
-public class CodeSenseDbContext : DbContext
+public class CodeSenseDbContext(DbContextOptions<CodeSenseDbContext> options) : DbContext(options)
 {
-    public CodeSenseDbContext(DbContextOptions<CodeSenseDbContext> options)
-        : base(options)
-    {
-    }
-
+    public DbSet<User> Users { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Project> Projects { get; set; }
 }

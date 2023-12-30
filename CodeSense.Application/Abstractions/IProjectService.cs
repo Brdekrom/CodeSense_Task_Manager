@@ -1,8 +1,8 @@
-﻿using CodeSense.Domain.Entities;
+﻿using CodeSense.Domain.DTOs;
 
 namespace CodeSense.Application.Abstractions;
 
 public interface IProjectService
 {
-    Task<List<Employee>> RetrieveAvailableEmployeesAsync(List<Requirement> requirements);
+    List<EmployeeDTO> Handle(ProjectDTO requirements);
 }

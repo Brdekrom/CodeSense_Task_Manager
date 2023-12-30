@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using CodeSense.Application.Abstractions;
+﻿using CodeSense.Application.Abstractions;
 using CodeSense.Domain.DTOs;
-using CodeSense.Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,42 +7,27 @@ namespace CodeSense.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProjectManagementController : ControllerBase
+public class ProjectManagementController(
+    IProjectService projectService) : ControllerBase
 {
-    private readonly IProjectService _projectService;
-    private readonly IValidator<Project> _projectValidator;
-    private readonly IMapper _mapper;
-
-    public ProjectManagementController(
-        IProjectService projectService,
-        IValidator<Project> projectValidator,
-        IMapper mapper)
-    {
-        _projectService = projectService;
-        _projectValidator = projectValidator;
-        _mapper = mapper;
-    }
+    private readonly IProjectService _projectService = projectService;
 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] ProjectDTO dTO)
     {
-        var project = _mapper.Map<Project>(dTO);
-        var validationResult = _projectValidator.Validate(project);
-        if (!validationResult.IsValid)
+        try
         {
-            return BadRequest(validationResult.Errors);
-        }
-        var selectedEmployees = await _projectService.RetrieveAvailableEmployeesAsync(project.Requirements);
+            var employees = _projectService.Handle(dTO);
 
-        if (!selectedEmployees.Any())
+            return Ok(employees);
+        }
+        catch (ValidationException e)
         {
-            return NotFound();
+            return BadRequest(e.Errors);
         }
-
-        var employees = selectedEmployees
-            .Select(_mapper.Map<EmployeeDTO>)
-            .ToList();
-
-        return Ok(employees);
+        catch (NullReferenceException e)
+        {
+            return NotFound(e.Message);
+        }
     }
 }

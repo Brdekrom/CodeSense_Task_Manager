@@ -1,31 +1,33 @@
 ﻿namespace CodeSense.Application.Services;
 
+using AutoMapper;
 using CodeSense.Application.Abstractions;
 using CodeSense.Domain.Common.Constants;
+using CodeSense.Domain.DTOs;
 using CodeSense.Domain.Entities;
+using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ProjectService : IProjectService
+public class ProjectHandlerService(IEntityManagementService<Employee> employeeService, IMapper mapper, IValidator<Project> projectValidator) : IProjectService
 {
-    private readonly IEntityManagementService<Employee> _employeeService;
+    private readonly IEntityManagementService<Employee> _employeeService = employeeService;
+    private readonly IMapper _mapper;
+    private readonly IValidator<Project> _projectValidator;
 
-    public ProjectService(IEntityManagementService<Employee> employeeService)
+    public List<EmployeeDTO> Handle(ProjectDTO projectDto)
     {
-        _employeeService = employeeService;
-    }
+        var project = MapAndValidate(projectDto);
 
-    public async Task<List<Employee>> RetrieveAvailableEmployeesAsync(List<Requirement> requirements)
-    {
-        var employeesByLevel = await GetEmployeesByLevelAsync(await GetAvailableEmployeesAsync());
+        var employeesByLevel = GetEmployeesByLevel(GetAvailableEmployees());
 
         var employeeList = new List<Employee>();
 
-        foreach (var requirement in requirements)
+        foreach (var requirement in project.Requirements)
         {
-            if (employeesByLevel.ContainsKey(requirement.Level))
+            if (employeesByLevel.TryGetValue(requirement.Level, out List<Employee>? value))
             {
-                var employeesOfLevel = employeesByLevel[requirement.Level];
+                var employeesOfLevel = value;
 
                 var toTake = Math.Min(employeesOfLevel.Count, requirement.Amount);
                 employeeList.AddRange(employeesOfLevel.Take(toTake));
@@ -39,15 +41,38 @@ public class ProjectService : IProjectService
             }
         }
 
-        return employeeList;
+        if (!employeeList.Any())
+        {
+            throw new NullReferenceException("No Employee available for this project");
+        }
+
+        var employees = employeeList
+            .Select(_mapper.Map<EmployeeDTO>)
+            .ToList();
+
+        return employees;
     }
 
-    private async Task<IDictionary<string, List<Employee>>> GetEmployeesByLevelAsync(IList<Employee> employees)
+    private Project MapAndValidate(ProjectDTO project)
+    {
+        var mappedProject = _mapper.Map<Project>(project);
+
+        var validationResult = _projectValidator.Validate(mappedProject);
+
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException("validation failed", validationResult.Errors);
+        }
+
+        return mappedProject;
+    }
+
+    private static IDictionary<string, List<Employee>> GetEmployeesByLevel(IList<Employee> employees)
     => employees
             .GroupBy(employee => employee.Level)
             .ToDictionary(x => x.Key, x => x.ToList());
 
-    private async Task<List<Employee>> GetAvailableEmployeesAsync()
+    private List<Employee> GetAvailableEmployees()
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Now);
         return _employeeService
@@ -56,7 +81,7 @@ public class ProjectService : IProjectService
                             .ToList();
     }
 
-    private void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)
+    private static void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)
     {
         while (requiredAmount > 0)
         {
