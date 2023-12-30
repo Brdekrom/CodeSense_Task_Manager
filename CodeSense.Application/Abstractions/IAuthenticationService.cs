@@ -2,7 +2,7 @@
 
 namespace CodeSense.Application.Abstractions;
 
-internal interface IAuthenticationHandlerService
+public interface IAuthenticationService
 {
     Task<bool> LoginAsync(User user);
 

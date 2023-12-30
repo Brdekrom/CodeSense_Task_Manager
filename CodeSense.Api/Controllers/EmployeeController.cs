@@ -3,12 +3,14 @@ using CodeSense.Application.Abstractions;
 using CodeSense.Domain.DTOs;
 using CodeSense.Domain.Entities;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeSense.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class EmployeeController : ControllerBase
 {
     private readonly IEntityManagementService<Employee> _employeeService;

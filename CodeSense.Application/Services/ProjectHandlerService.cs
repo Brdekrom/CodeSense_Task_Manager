@@ -12,27 +12,28 @@ using System.Linq;
 public class ProjectHandlerService(IEntityManagementService<Employee> employeeService, IMapper mapper, IValidator<Project> projectValidator) : IProjectService
 {
     private readonly IEntityManagementService<Employee> _employeeService = employeeService;
-    private readonly IMapper _mapper;
-    private readonly IValidator<Project> _projectValidator;
+    private readonly IMapper _mapper = mapper;
+    private readonly IValidator<Project> _projectValidator = projectValidator;
 
     public List<EmployeeDTO> Handle(ProjectDTO projectDto)
     {
         var project = MapAndValidate(projectDto);
 
-        var employeesByLevel = GetEmployeesByLevel(GetAvailableEmployees());
+        var availableEmployees = GetAvailableEmployees();
+
+        var employeesByLevel = SortEmployeesByLevel(availableEmployees);
 
         var employeeList = new List<Employee>();
 
         foreach (var requirement in project.Requirements)
         {
-            if (employeesByLevel.TryGetValue(requirement.Level, out List<Employee>? value))
+            if (employeesByLevel.TryGetValue(requirement.Level, out List<Employee>? employeesOfLevel))
             {
-                var employeesOfLevel = value;
-
-                var toTake = Math.Min(employeesOfLevel.Count, requirement.Amount);
-                employeeList.AddRange(employeesOfLevel.Take(toTake));
-                employeesOfLevel.RemoveRange(0, toTake);
-                requirement.Amount -= toTake;
+                var employeesToTake = Math.Min(employeesOfLevel.Count, requirement.Amount);
+                var chosenEmployees = employeesOfLevel.Take(employeesToTake);
+                employeeList.AddRange(chosenEmployees);
+                employeesOfLevel.RemoveRange(0, employeesToTake);
+                requirement.Amount -= employeesToTake;
             }
 
             if (requirement.Amount > 0)
@@ -67,7 +68,7 @@ public class ProjectHandlerService(IEntityManagementService<Employee> employeeSe
         return mappedProject;
     }
 
-    private static IDictionary<string, List<Employee>> GetEmployeesByLevel(IList<Employee> employees)
+    private static IDictionary<string, List<Employee>> SortEmployeesByLevel(IList<Employee> employees)
     => employees
             .GroupBy(employee => employee.Level)
             .ToDictionary(x => x.Key, x => x.ToList());
@@ -94,7 +95,8 @@ public class ProjectHandlerService(IEntityManagementService<Employee> employeeSe
 
             var higherLevelEmployees = employeesByLevel[nextHigherLevel];
             var toTake = Math.Min(higherLevelEmployees.Count, requiredAmount);
-            employeeList.AddRange(higherLevelEmployees.Take(toTake));
+            var choosenEmployees = higherLevelEmployees.Take(toTake);
+            employeeList.AddRange(choosenEmployees);
             higherLevelEmployees.RemoveRange(0, toTake);
             requiredAmount -= toTake;
         }

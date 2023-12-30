@@ -9,7 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IEntityManagementService<>), typeof(EntityManagementService<>))
-                .AddScoped<IProjectService, ProjectHandlerService>();
+                .AddScoped<IProjectService, ProjectHandlerService>()
+                .AddSingleton<TokenService>();
 
         return services;
     }
