@@ -1105,11 +1105,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj",
       "projectName": "CodeSense.Infrastructure",
-      "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Infrastructure\\CodeSense.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\brdek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\brdek\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1126,8 +1126,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Application\\CodeSense.Application.csproj": {
-              "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Application\\CodeSense.Application.csproj"
+            "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Application\\CodeSense.Application.csproj": {
+              "projectPath": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Application\\CodeSense.Application.csproj"
             }
           }
         }

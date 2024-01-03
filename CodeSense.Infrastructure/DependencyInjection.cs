@@ -8,8 +8,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInMemoryDatabase(this IServiceCollection services)
     {
-        services.AddDbContext<CodeSenseDbContext>(options => options.UseInMemoryDatabase("MyInMemoryDb"))
-            .
+        services.AddDbContext<CodeSenseDbContext>(options => options.UseInMemoryDatabase("MyInMemoryDb"));
+            
 
         return services;
     }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj": {}
+    "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Domain\\CodeSense.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj": {
+    "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Domain\\CodeSense.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Domain\\CodeSense.Domain.csproj",
         "projectName": "CodeSense.Domain",
-        "projectPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\CodeSense.Domain.csproj",
+        "projectPath": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Domain\\CodeSense.Domain.csproj",
         "packagesPath": "C:\\Users\\brdek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brdek\\source\\repos\\CodeSense Task Manager\\CodeSense.Domain\\obj\\",
+        "outputPath": "C:\\Users\\brdek\\Source\\Repos\\CodeSense_Task_Manager\\CodeSense.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brdek\\AppData\\Roaming\\NuGet\\NuGet.Config",
