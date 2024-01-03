@@ -3,6 +3,7 @@ using CodeSense.Application.Settings;
 using CodeSense.Domain;
 using CodeSense.Infrastructure;
 using CodeSense.Infrastructure.Data;
+using CodeSense.Infrastructure.DbOptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var jwtSettingsSection = builder.Configuration.GetSection("Jwt");
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+var connectionStringSection = builder.Configuration.GetSection("ConnectionStrings");
+var connectionString = connectionStringSection.Get<DbOptions>();
 builder.Services.Configure<JwtSettings>(jwtSettingsSection);
 
 builder.Services.AddAuthentication(x =>
@@ -35,7 +38,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
-builder.Services.AddInMemoryDatabase();
+builder.Services.AddDatabase(connectionString!.DBCS);
 builder.Services.AddDomainLayer();
 builder.Services.AddApplicationServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

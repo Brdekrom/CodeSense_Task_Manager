@@ -6,10 +6,12 @@ namespace CodeSense.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInMemoryDatabase(this IServiceCollection services)
+    public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)
     {
-        services.AddDbContext<CodeSenseDbContext>(options => options.UseInMemoryDatabase("MyInMemoryDb"));
-            
+        services.AddDbContext<CodeSenseDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString); 
+        });
 
         return services;
     }
