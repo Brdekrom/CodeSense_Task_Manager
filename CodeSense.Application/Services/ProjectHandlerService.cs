@@ -27,18 +27,18 @@ public class ProjectHandlerService(IEntityManagementService<Employee> employeeSe
 
         foreach (var requirement in project.Requirements)
         {
-            if (employeesByLevel.TryGetValue(requirement.Level, out List<Employee>? employeesOfLevel))
+            if (employeesByLevel.TryGetValue(requirement.Position, out List<Employee>? employeesOfLevel))
             {
-                var employeesToTake = Math.Min(employeesOfLevel.Count, requirement.Amount);
+                var employeesToTake = Math.Min(employeesOfLevel.Count, requirement.RequiredEmployees);
                 var chosenEmployees = employeesOfLevel.Take(employeesToTake);
                 employeeList.AddRange(chosenEmployees);
                 employeesOfLevel.RemoveRange(0, employeesToTake);
-                requirement.Amount -= employeesToTake;
+                requirement.RequiredEmployees -= employeesToTake;
             }
 
-            if (requirement.Amount > 0)
+            if (requirement.RequiredEmployees > 0)
             {
-                GetNextHigherLevel(requirement.Level, requirement.Amount, employeesByLevel, employeeList);
+                GetNextHigherLevel(requirement.Position, requirement.RequiredEmployees, employeesByLevel, employeeList);
             }
         }
 
@@ -70,7 +70,7 @@ public class ProjectHandlerService(IEntityManagementService<Employee> employeeSe
 
     private static IDictionary<string, List<Employee>> SortEmployeesByLevel(IList<Employee> employees)
     => employees
-            .GroupBy(employee => employee.Level)
+            .GroupBy(employee => employee.Position)
             .ToDictionary(x => x.Key, x => x.ToList());
 
     private List<Employee> GetAvailableEmployees()

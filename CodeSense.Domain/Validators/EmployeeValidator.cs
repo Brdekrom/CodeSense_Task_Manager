@@ -8,16 +8,16 @@ public class EmployeeValidator : AbstractValidator<Employee>
 {
     public EmployeeValidator()
     {
-        RuleFor(x => x.Name)
+        RuleFor(x => x.FirstName)
             .NotEmpty().WithMessage("Name is required.")
             .MaximumLength(20).WithMessage("Name cannot be longer than 20 characters.");
 
-        RuleFor(x => x.Level)
+        RuleFor(x => x.Position)
             .NotEmpty().WithMessage("Level is required.")
             .Must(x => new[] { EmployeeLevel.Junior, EmployeeLevel.Medior, EmployeeLevel.Senior, EmployeeLevel.Architect, EmployeeLevel.PM }.Contains(x))
             .WithMessage("Level must be one of the following: Junior Developer, Medior Developer, Senior Developer, Architect, PM");
 
-        RuleFor(x => x.Cost)
+        RuleFor(x => x.Salary)
             .GreaterThanOrEqualTo(1).WithMessage("Cost must be zero or greater.");
 
         RuleFor(x => x.AvailableFrom)

@@ -24,9 +24,9 @@ public static class DbInitializer
         var levelNames = new[] { "Junior Developer", "Medior Developer", "Senior Developer", "Architect", "PM" };
 
         var faker = new Faker<Employee>()
-            .RuleFor(o => o.Name, f => f.Name.FirstName())
-            .RuleFor(o => o.Level, f => f.PickRandom(levelNames))
-            .RuleFor(o => o.Cost, f => f.Random.Number(400, 700))
+            .RuleFor(o => o.FirstName, f => f.Name.FirstName())
+            .RuleFor(o => o.Position, f => f.PickRandom(levelNames))
+            .RuleFor(o => o.Salary, f => f.Random.Number(400, 700))
             .RuleFor(o => o.AvailableFrom, f => DateOnly.FromDateTime(f.Date.Past(1)))
             .RuleFor(o => o.AvailableUntil, f => DateOnly.FromDateTime(f.Date.Future(1)));
 

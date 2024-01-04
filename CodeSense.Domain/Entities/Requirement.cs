@@ -4,6 +4,6 @@ namespace CodeSense.Domain.Entities;
 
 public class Requirement : EntityBase
 {
-    public string Level { get; set; }
-    public int Amount { get; set; }
+    public string Position { get; set; }
+    public int RequiredEmployees { get; set; }
 }
