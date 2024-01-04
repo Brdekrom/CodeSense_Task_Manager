@@ -17,6 +17,10 @@
         <li class="nav-item">
           <a class="nav-link" (click) ="_auth.loginWithRedirect()">Log in</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register/user">Sign up</a>
+        </li>
         }
         @else
         {
@@ -25,9 +29,7 @@
           </li>
         }
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/pricing">TBA</a>
-        </li>
+        
         <!-- Add more nav items with corresponding routerLinks here -->
       </ul>
     </div>

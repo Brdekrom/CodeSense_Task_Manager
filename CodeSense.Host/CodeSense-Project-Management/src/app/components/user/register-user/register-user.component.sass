@@ -1,0 +1,50 @@
+$primary-color: #007bff
+$border-color: #ccc
+$error-color: #ff5252
+$success-color: #4caf50
+$form-width: 300px
+$padding: 20px
+$border-radius: 4px
+
+/* General form styling */
+form
+  display: flex
+  flex-direction: column
+  width: $form-width
+  margin: 0 auto
+  padding: $padding
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  border-radius: $border-radius
+
+  label
+    margin-top: 10px
+    font-weight: bold
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"]
+    width: 100%
+    padding: 8px
+    margin-top: 5px
+    border: 1px solid $border-color
+    border-radius: $border-radius
+
+    &.ng-invalid.ng-touched
+      border-color: $error-color
+
+    &.ng-valid.ng-touched
+      border-color: $success-color
+
+  button
+    margin-top: 20px
+    padding: 10px 15px
+    border: none
+    border-radius: $border-radius
+    background-color: $primary-color
+    color: white
+    cursor: pointer
+
+    &:disabled
+      background-color: lighten($border-color, 30%)
+      cursor: default
+
