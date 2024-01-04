@@ -45,8 +45,8 @@ export class RegisterUserComponent {
       next: (result) => {
         console.warn("result", result);
         this.successMessage = "User successfully registered.";
-        this.registerForm.reset(); // Reset form on successful submission
-        this.router.navigate(['/login']); // Navigate to home page on successful submission
+        this.registerForm.reset(); 
+        this.router.navigate(['/login']); 
       },
       error: (error) => {
         console.error("Error", error);

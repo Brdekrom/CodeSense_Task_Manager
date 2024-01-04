@@ -8,7 +8,7 @@ import { User } from '../../interfaces/user';
 })
 export class UserService {
 
-  private apiUrl = 'http://your-api-url/api/users'; // Replace with your API URL
+  private apiUrl = 'http://localhost:3000'; // Update this URL
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +23,7 @@ export class UserService {
   }
 
   // Create new user
+  //
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.apiUrl, user);
   }
