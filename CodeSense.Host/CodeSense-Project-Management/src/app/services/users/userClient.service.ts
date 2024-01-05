@@ -6,9 +6,9 @@ import { User } from '../../interfaces/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserClientService {
 
-  private apiUrl = 'http://localhost:3000'; // Update this URL
+  private apiUrl = 'http://localhost:3000/user'; // Update this URL
 
   constructor(private http: HttpClient) { }
 

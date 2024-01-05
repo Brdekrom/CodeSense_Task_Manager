@@ -1,5 +1,5 @@
 import { Component, } from '@angular/core';
-import { UserService } from 'src/app/services/users/user.service';
+import { UserClientService } from 'src/app/services/users/userClient.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ export class RegisterUserComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userClientService: UserClientService, private router: Router) { }
 
   registerForm = new FormGroup({
     firstName: new FormControl(''),
@@ -41,7 +41,7 @@ export class RegisterUserComponent {
     this.errorMessage = null;
 
     const user = this.mapUser();
-    this.userService.createUser(user).subscribe({
+    this.userClientService.createUser(user).subscribe({
       next: (result) => {
         console.warn("result", result);
         this.successMessage = "User successfully registered.";
