@@ -14,5 +14,4 @@ export interface ClientCompany {
     Users?: User[];
     Emoloyees?: Employee[];
     Projects?: Project[];
-
 }
