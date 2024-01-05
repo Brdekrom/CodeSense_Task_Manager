@@ -50,7 +50,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-DbInitializer.SeedDatabase(app.Services);
+//TODO: uncomment this line to seed the database once
+//DbInitializer.SeedDatabase(app.Services);
 
 if (app.Environment.IsDevelopment())
 {

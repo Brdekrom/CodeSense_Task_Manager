@@ -3,7 +3,7 @@ using CodeSense.Domain.DTOs;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodeSense.Api.Controllers;
+namespace CodeSense.Api.Controllers.ProjectManagement;
 
 [Route("api/[controller]")]
 [ApiController]

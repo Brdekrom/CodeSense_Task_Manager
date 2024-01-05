@@ -17,7 +17,7 @@ public class UserValidator : AbstractValidator<User>
             .MaximumLength(20).WithMessage("Last name must be a maximum of 20 characters.")
             .Matches("^[a-zA-Z]+$").WithMessage("Last name must contain only letters.");
 
-        RuleFor(x => x.EmailAddress)
+        RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email address is required.")
             .EmailAddress().WithMessage("Invalid email format.");
 

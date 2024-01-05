@@ -1,8 +1,9 @@
 ﻿using CodeSense.Application.Abstractions;
+using CodeSense.Application.Services;
 using CodeSense.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodeSense.Application.Services;
+namespace CodeSense.Api.Controllers.Authentication;
 
 [ApiController]
 [Route("[controller]")]

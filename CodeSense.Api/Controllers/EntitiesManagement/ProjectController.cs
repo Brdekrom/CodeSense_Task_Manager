@@ -5,7 +5,7 @@ using CodeSense.Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodeSense.Api.Controllers;
+namespace CodeSense.Api.Controllers.EntitiesManagement;
 
 [ApiController]
 [Route("api/[controller]")]

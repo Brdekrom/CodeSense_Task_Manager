@@ -17,7 +17,7 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
     {
         Validate(loginUser);
 
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.EmailAddress == loginUser.EmailAddress && u.IsDeleted == false);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginUser.Email && u.IsDeleted == false);
 
         if (user == null)
         {
@@ -33,7 +33,7 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
     {
         Validate(user);
 
-        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => u.EmailAddress == user.EmailAddress && u.IsDeleted == false);
+        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email && u.IsDeleted == false);
         if (checkExistence is not null)
         {
             return false;
@@ -51,7 +51,7 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
     {
         Validate(user);
 
-        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => !(u.EmailAddress != user.EmailAddress && u.IsDeleted == false));
+        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => !(u.Email != user.Email && u.IsDeleted == false));
         if (checkExistence is null)
         {
             return false;
@@ -65,14 +65,5 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
         return true;
     }
 
-    private static void Validate(User user)
-    {
-        var validator = new UserValidator();
-        var result = validator.Validate(user);
-
-        if (!result.IsValid)
-        {
-            throw new ValidationException(result.Errors);
-        }
-    }
+    
 }

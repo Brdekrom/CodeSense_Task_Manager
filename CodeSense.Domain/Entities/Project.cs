@@ -13,6 +13,7 @@ public class Project : EntityBase
     public DateOnly Deadline { get; set; }
     public ICollection<Requirement> Requirements { get; set; }
     public ICollection<Employee> Employees { get; set; }
+    public bool IsCompleted { get; set; }
 
     // navigational properties
     public ClientCompany ClientCompany { get; set; }
