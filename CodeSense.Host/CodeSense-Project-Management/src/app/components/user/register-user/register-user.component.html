@@ -9,23 +9,37 @@
     <label for="password">Company:</label>
     <input id="companyName" type="companyName" formControlName="companyName">
 
-    <label for="email">Email:</label>
+    <label for="email">Email: @if(registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched){
+        <span class="error">
+            Please enter a valid email address.
+        </span>
+        }</label>
+
     <input id="email" type="email" formControlName="email">
+
 
     <label for="password">Password:</label>
     <input id="password" type="password" formControlName="password">
 
-    <button type="submit" [disabled]="!registerForm.valid">Register</button>
+    <label for="confirmPassword">Confirm Password: @if(registerForm.get('confirmPassword') !=
+        registerForm.get('password') && registerForm.get('confirmPassword')?.touched){
+        <span class="error">
+            Passwords do not match.
+        </span>
+        }</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword">
+
+
+
+    <button type="submit" [disabled]="!registerForm.valid ">Register</button>
 </form>
 
-@if(successMessage)
-{
+@if(successMessage){
 <div class="alert alert-success">
     {{successMessage}}
 </div>
 }
-@else if(errorMessage)
-{
+@else if(errorMessage){
 <div class="alert alert-danger">
     {{errorMessage}}
 </div>

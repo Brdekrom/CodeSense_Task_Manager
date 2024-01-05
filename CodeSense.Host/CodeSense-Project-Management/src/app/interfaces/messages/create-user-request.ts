@@ -2,7 +2,6 @@ export interface CreateUserRequest {
     clientCompanyName: string;
     firstName: string;
     lastName: string;
-    emailAddress: string;
+    email: string;
     password: string;
-    isAdmin?: boolean;
 }
