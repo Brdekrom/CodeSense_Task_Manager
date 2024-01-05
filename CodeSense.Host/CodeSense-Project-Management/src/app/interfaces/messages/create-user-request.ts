@@ -1,10 +1,8 @@
-export interface User {
-    id?: number;
-    clientCompanyId?: number;
+export interface CreateUserRequest {
+    clientCompanyName: string;
     firstName: string;
     lastName: string;
     emailAddress: string;
     password: string;
     isAdmin?: boolean;
-  }
-  
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
+import { CreateUserRequest } from 'src/app/interfaces/messages/create-user-request';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserClientService {
 
   // Create new user
   //
-  createUser(user: User): Observable<User> {
+  createUser(user: CreateUserRequest): Observable<User> {
     return this.http.post<User>(this.apiUrl, user);
   }
 
