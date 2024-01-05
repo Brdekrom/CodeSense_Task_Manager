@@ -9,10 +9,14 @@ namespace CodeSense.Domain.Entities
 {
     public class Address : EntityBase
     {
+        public int ClientCompanyId { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
+
+        // navigational properties
+        public ClientCompany ClientCompany { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace CodeSense.Domain.Entities
     {
         public string Name { get; set; }
         public string PrimaryEmailAddress { get; set; }
-        public ICollection<string> SecondaryEmailAddresses { get; set; }
+        public ICollection<string>? SecondaryEmailAddresses { get; set; }
         public ICollection<Address> Address { get; set; }
         public ICollection<User> Users {  get; set; }
         public ICollection<Employee> Employees { get; set; }
