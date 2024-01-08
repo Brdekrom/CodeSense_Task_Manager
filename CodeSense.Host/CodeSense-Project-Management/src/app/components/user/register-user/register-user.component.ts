@@ -31,16 +31,12 @@ export class RegisterUserComponent {
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-    console.log(confirmPassword, password);
-    console.log(password === confirmPassword);
-    
-    
     return password === confirmPassword ? null : { 'mismatch': true };
   }
 
   mapToRequest(): CreateUserRequest {
     return {
-      clientCompanyName: this.registerForm.value.company!,
+      clientCompanyName: this.registerForm.value.companyName!,
       firstName: this.registerForm.value.firstName!,
       lastName: this.registerForm.value.lastName!,
       email: this.registerForm.value.email!,
@@ -52,7 +48,11 @@ export class RegisterUserComponent {
     this.successMessage = null;
     this.errorMessage = null;
 
+    
+
     const CreateUserRequest = this.mapToRequest();
+    console.log(CreateUserRequest);
+
     this.userClientService.createUser(CreateUserRequest).subscribe({
       next: (result) => {
         console.warn("result", result);

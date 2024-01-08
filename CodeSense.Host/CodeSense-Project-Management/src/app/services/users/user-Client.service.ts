@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { CreateUserRequest } from 'src/app/interfaces/messages/create-user-request';
@@ -9,7 +9,7 @@ import { CreateUserRequest } from 'src/app/interfaces/messages/create-user-reque
 })
 export class UserClientService {
 
-  private apiUrl = 'http://localhost:3000/user'; // Update this URL
+  private apiUrl = 'http://localhost:5007/api/authentication'; // Update this URL
 
   constructor(private http: HttpClient) { }
 
@@ -25,8 +25,13 @@ export class UserClientService {
 
   // Create new user
   //
-  createUser(user: CreateUserRequest): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
+  createUser(createUser: CreateUserRequest): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+      })
+  };
+    return this.http.post<User>(`${this.apiUrl}/${'register'}`, createUser, httpOptions);
   }
 
   // Update user

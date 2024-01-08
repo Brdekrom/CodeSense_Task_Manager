@@ -1,14 +1,17 @@
 ﻿using CodeSense.Application.Abstractions;
+using CodeSense.Application.Commands.Users;
 using CodeSense.Application.Services;
 using CodeSense.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeSense.Api.Controllers.Authentication;
 
 [ApiController]
-[Route("[controller]")]
-public class AuthenticationController(IAuthenticationService authenticationService, TokenService tokenService) : ControllerBase
+[Route("api/[controller]")]
+public class AuthenticationController(IAuthenticationService authenticationService, TokenService tokenService, IMediator mediator ) : ControllerBase
 {
+    private readonly IMediator _mediator = mediator;
     private readonly IAuthenticationService _authenticationService = authenticationService;
     private readonly TokenService _tokenService = tokenService;
 
@@ -25,9 +28,9 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] User registerUser)
+    public async Task<IActionResult> Register([FromBody] CreateUserCommand registerUser)
     {
-        var result = await _authenticationService.RegisterAsync(registerUser);
+        var result = await _mediator.Send(registerUser);
 
         if (result)
         {

@@ -1,9 +1,10 @@
 using CodeSense.Application;
+using CodeSense.Application.Handlers.Users.Commands;
 using CodeSense.Application.Settings;
 using CodeSense.Domain;
 using CodeSense.Infrastructure;
-using CodeSense.Infrastructure.Data;
 using CodeSense.Infrastructure.DbOptions;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -15,6 +16,16 @@ var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 var connectionStringSection = builder.Configuration.GetSection("ConnectionStrings");
 var connectionString = connectionStringSection.Get<DbOptions>();
 builder.Services.Configure<JwtSettings>(jwtSettingsSection);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddAuthentication(x =>
 {
@@ -40,8 +51,10 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddDatabase(connectionString!.DBCS);
 builder.Services.AddDomainLayer();
+builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -63,6 +76,8 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
+
+app.UseCors("AllowAll");
 
 app.UseRouting();
 app.UseHttpsRedirection();

@@ -9,9 +9,9 @@ using FluentValidation;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ProjectHandlerService(IEntityManagementService<Employee> employeeService, IMapper mapper, IValidator<Project> projectValidator) : IProjectService
+public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectValidator) : IProjectService
 {
-    private readonly IEntityManagementService<Employee> _employeeService = employeeService;
+    // Add employee service after creating it
     private readonly IMapper _mapper = mapper;
     private readonly IValidator<Project> _projectValidator = projectValidator;
 
@@ -76,10 +76,12 @@ public class ProjectHandlerService(IEntityManagementService<Employee> employeeSe
     private List<Employee> GetAvailableEmployees()
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Now);
-        return _employeeService
-                            .GetAll()
-                            .Where(x => x.AvailableFrom <= today && x.AvailableUntil >= today)
-                            .ToList();
+        return new List<Employee>();
+            
+            //_employeeService
+                            //.GetAll()
+                            //.Where(x => x.AvailableFrom <= today && x.AvailableUntil >= today)
+                            //.ToList();
     }
 
     private static void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)

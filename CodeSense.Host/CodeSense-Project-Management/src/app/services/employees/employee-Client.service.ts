@@ -8,7 +8,7 @@ import { Employee } from 'src/app/interfaces/emloyee';
 })
 export class EmployeeClientService {
 
-  private apiUrl = 'http://localhost:3000/employee'; // Update this URL
+  private apiUrl = 'http://localhost:7014/api/employee'; // Update this URL
 
   constructor(private http: HttpClient) { }
 

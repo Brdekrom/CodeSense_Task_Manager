@@ -8,14 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeSense.Application.Services;
 
+//TODO: Move this to Application layer
+
 public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<User> passwordHasher) : IAuthenticationService
 {
     private readonly CodeSenseDbContext _context = context;
     private readonly IPasswordHasher<User> _passwordHasher = passwordHasher;
 
+
     public async Task<bool> LoginAsync(User loginUser)
     {
-        Validate(loginUser);
 
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginUser.Email && u.IsDeleted == false);
 
@@ -31,7 +33,6 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
 
     public async Task<bool> RegisterAsync(User user)
     {
-        Validate(user);
 
         var checkExistence = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email && u.IsDeleted == false);
         if (checkExistence is not null)
@@ -49,7 +50,6 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
 
     public async Task<bool> UnregisterAsync(User user)
     {
-        Validate(user);
 
         var checkExistence = await _context.Users.FirstOrDefaultAsync(u => !(u.Email != user.Email && u.IsDeleted == false));
         if (checkExistence is null)

@@ -8,7 +8,7 @@ import { Project } from 'src/app/interfaces/project';
 })
 export class ProjectClientService {
 
-  private apiUrl = 'http://localhost:3000/project'; // Update this URL
+  private apiUrl = 'http://localhost:7014/api/project'; // Update this URL
 
   constructor(private http: HttpClient) { }
 

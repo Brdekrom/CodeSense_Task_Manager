@@ -1,4 +1,9 @@
-﻿using CodeSense.Infrastructure.Persistence;
+﻿using CodeSense.Application.Abstractions;
+using CodeSense.Application.Services;
+using CodeSense.Domain.Entities;
+using CodeSense.Infrastructure.Persistence;
+using CodeSense.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +17,18 @@ public static class DependencyInjection
         {
             options.UseSqlServer(connectionString); 
         });
+
+        
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    {
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        // services.AddScoped<IProjectService, ProjectService>();
 
         return services;
     }

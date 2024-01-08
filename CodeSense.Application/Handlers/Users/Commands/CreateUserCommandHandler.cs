@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace CodeSense.Application.Handlers.Users.Commands
 {
-    public class CreateUserCommandHandler() : IRequestHandler<CreateUserCommand, bool>
+    public class CreateUserCommandHandler(IUserService userService, IMapper mapper) : IRequestHandler<CreateUserCommand, bool>
     {
-        private readonly IUserService _userService;
-        private readonly IMapper _mapper;
+        private readonly IUserService _userService = userService;
+        private readonly IMapper _mapper = mapper;
 
         public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
