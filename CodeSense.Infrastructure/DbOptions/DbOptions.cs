@@ -8,6 +8,6 @@ namespace CodeSense.Infrastructure.DbOptions
 {
     public class DbOptions
     {
-        public string DBCS { get; set; }
+        public string ConnectionString { get; set; }
     }
 }
