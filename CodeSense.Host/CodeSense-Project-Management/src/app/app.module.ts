@@ -29,9 +29,7 @@ import { RegisterUserComponent } from './components/user/register-user/register-
     HttpClientModule,
     ReactiveFormsModule,
     AuthModule.forRoot({
-      ...env.auth,
-      }
-    }),
+      ...env.auth}),
   ],
   providers: [],
   bootstrap: [AppComponent]
