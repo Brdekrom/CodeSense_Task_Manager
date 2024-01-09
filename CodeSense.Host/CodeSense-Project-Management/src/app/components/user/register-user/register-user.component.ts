@@ -21,6 +21,7 @@ export class RegisterUserComponent {
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', Validators.required),
@@ -33,37 +34,39 @@ export class RegisterUserComponent {
     const confirmPassword = control.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { 'mismatch': true };
   }
+  
+  onSubmit() {
+    this.successMessage = null;
+    this.errorMessage = null;
+
+    const CreateUserRequest = this.mapToRequest();
+
+    this.userClientService.createUser(CreateUserRequest).subscribe({
+      next: (userId) => {
+        console.log("User ID", userId);
+        this.successMessage = "User successfully registered. You'll be redirected to the login page.";
+        this.registerForm.reset();
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 4500);
+      },
+      error: (error) => {
+        console.error("Error", error);
+        this.errorMessage = (error.error && error.error.message) ? error.error.message : "There was an error registering the user.";
+        this.registerForm.reset();
+      }
+    });
+  }
 
   mapToRequest(): CreateUserRequest {
     return {
       clientCompanyName: this.registerForm.value.companyName!,
       firstName: this.registerForm.value.firstName!,
       lastName: this.registerForm.value.lastName!,
+      phone: this.registerForm.value.phone!,
       email: this.registerForm.value.email!,
       password: this.registerForm.value.password!,
     }
   }
 
-  onSubmit() {
-    this.successMessage = null;
-    this.errorMessage = null;
-
-    
-
-    const CreateUserRequest = this.mapToRequest();
-    console.log(CreateUserRequest);
-
-    this.userClientService.createUser(CreateUserRequest).subscribe({
-      next: (result) => {
-        console.warn("result", result);
-        this.successMessage = "User successfully registered.";
-        this.registerForm.reset();
-        this.router.navigate(['/login']);
-      },
-      error: (error) => {
-        console.error("Error", error);
-        this.errorMessage = "There was an error registering the user.";
-      }
-    });
-  }
 }

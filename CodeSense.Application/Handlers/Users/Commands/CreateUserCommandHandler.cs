@@ -5,37 +5,33 @@ using CodeSense.Domain.Entities;
 using CodeSense.Domain.Validators;
 using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeSense.Application.Handlers.Users.Commands
 {
-    public class CreateUserCommandHandler(IUserService userService, IMapper mapper) : IRequestHandler<CreateUserCommand, bool>
+    public class CreateUserCommandHandler(IUserService userService, IMapper mapper) : IRequestHandler<CreateUserCommand, int>
     {
         private readonly IUserService _userService = userService;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<User>(request);
-            Validate(user);
-
-            var checkExistence = await _userService.GetUserByEmailAsync(user.Email);
-            if (checkExistence is not null)
-            {
-                return false;
-            }
+            await Validate(user);
 
             user = await _userService.CreateUserAsync(user);
 
-            return user.Id != default;
+            return user.Id;
         }
 
-        private static void Validate(User user)
+        private async Task Validate(User user)
         {
+            var checkExistence = await _userService.GetUserByEmailAsync(user.Email);
+
+            if (checkExistence is not null)
+            {
+                throw new ValidationException("Email already exists");
+            }
+
             var validator = new UserValidator();
             var result = validator.Validate(user);
 

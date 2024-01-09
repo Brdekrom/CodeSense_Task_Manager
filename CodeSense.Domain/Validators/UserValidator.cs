@@ -10,12 +10,12 @@ public class UserValidator : AbstractValidator<User>
         RuleFor(x => x.FirstName)
             .NotEmpty().WithMessage("First name is required.")
             .MaximumLength(20).WithMessage("First name must be a maximum of 20 characters.")
-            .Matches("^[a-zA-Z]+$").WithMessage("First name must contain only letters.");
+            .Matches(@"^[\p{L}]+$").WithMessage("First name must contain only letters.");
 
         RuleFor(x => x.LastName)
             .NotEmpty().WithMessage("Last name is required.")
             .MaximumLength(20).WithMessage("Last name must be a maximum of 20 characters.")
-            .Matches("^[a-zA-Z]+$").WithMessage("Last name must contain only letters.");
+            .Matches(@"^[\p{L}]+$").WithMessage("Last name must contain only letters.");
 
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email address is required.")

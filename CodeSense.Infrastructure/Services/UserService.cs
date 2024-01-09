@@ -3,11 +3,6 @@ using CodeSense.Domain.Entities;
 using CodeSense.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeSense.Infrastructure.Services
 {
@@ -26,7 +21,6 @@ namespace CodeSense.Infrastructure.Services
             user = await GetUserByEmailAsync(user.Email);
 
             return user.Id != default ? user : new();
-
         }
 
         public async Task DeleteUserAsync(int userId)
@@ -48,13 +42,7 @@ namespace CodeSense.Infrastructure.Services
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
-            if (user == null)
-            {
-                return new();
-            }
-
-            return user;
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
         }
 
         public IEnumerable<User> GetUsers()
@@ -72,7 +60,7 @@ namespace CodeSense.Infrastructure.Services
             var currentUser = await GetUserAsync(user.Id);
             if (currentUser == null)
             {
-               return new();
+                return new();
             }
 
             currentUser.FirstName = user.FirstName;

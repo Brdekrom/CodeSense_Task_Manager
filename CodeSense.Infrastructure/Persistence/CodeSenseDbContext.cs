@@ -9,13 +9,4 @@ public class CodeSenseDbContext(DbContextOptions<CodeSenseDbContext> options) : 
     public DbSet<User> Users { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Project> Projects { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CodeSenseDbContext).Assembly);
-
-        base.OnModelCreating(modelBuilder);
-
-
-    }
 }

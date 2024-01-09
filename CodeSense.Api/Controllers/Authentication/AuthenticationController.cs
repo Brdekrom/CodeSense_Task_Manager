@@ -2,6 +2,7 @@
 using CodeSense.Application.Commands.Users;
 using CodeSense.Application.Services;
 using CodeSense.Domain.Entities;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace CodeSense.Api.Controllers.Authentication;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthenticationController(IAuthenticationService authenticationService, TokenService tokenService, IMediator mediator ) : ControllerBase
+public class AuthenticationController(IAuthenticationService authenticationService, TokenService tokenService, IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
     private readonly IAuthenticationService _authenticationService = authenticationService;
@@ -30,13 +31,16 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] CreateUserCommand registerUser)
     {
-        var result = await _mediator.Send(registerUser);
-
-        if (result)
+        try
         {
-            return Ok("Registration successful");
+            var userId = await _mediator.Send(registerUser);
+
+            return Ok(userId);
         }
-        return BadRequest("Registration failed");
+        catch (ValidationException ex)
+        {
+            return BadRequest(ex.Errors);
+        }
     }
 
     [HttpPost("unregister")]
