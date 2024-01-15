@@ -16,5 +16,5 @@ public class Project : EntityBase
     public bool IsCompleted { get; set; }
 
     // navigational properties
-    public ClientCompany ClientCompany { get; set; }
+    public Company ClientCompany { get; set; }
 }

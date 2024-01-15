@@ -1,9 +1,4 @@
 ﻿using CodeSense.Domain.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeSense.Domain.Entities
 {
@@ -18,6 +13,6 @@ namespace CodeSense.Domain.Entities
         public bool IsPrimary { get; set; }
 
         // navigational properties
-        public ClientCompany ClientCompany { get; set; }
+        public Company ClientCompany { get; set; }
     }
 }

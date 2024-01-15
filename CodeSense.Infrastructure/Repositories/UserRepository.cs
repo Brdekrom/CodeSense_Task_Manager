@@ -4,31 +4,48 @@ using CodeSense.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeSense.Infrastructure.Services
+namespace CodeSense.Infrastructure.Repositories
 {
-    internal class UserService(CodeSenseDbContext dbContext, IPasswordHasher<User> passwordHasher) : IUserService
+    public sealed class UserRepository(CodeSenseDbContext dbContext, IPasswordHasher<User> passwordHasher) : IRepository<User>
     {
         private readonly CodeSenseDbContext _dbContext = dbContext;
         private readonly IPasswordHasher<User> _passwordHasher = passwordHasher;
 
-        public async Task<User> CreateUserAsync(User user)
+        public async Task<User> CreateAsync(User user)
         {
             user.Password = _passwordHasher.HashPassword(user, user.Password);
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            user = await GetUserByEmailAsync(user.Email);
+            user = await GetByEmailAsync(user.Email);
 
             return user.Id != default ? user : new();
         }
 
-        public async Task DeleteUserAsync(int userId)
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var users = await _dbContext.Users.Where(u => !u.IsDeleted).ToListAsync();
+
+            return users;
         }
 
-        public async Task<User> GetUserAsync(int userId)
+        public async Task<bool> DeleteAsync(int userId)
+        {
+            var currentUser = await GetByIdAsync(userId);
+
+            if (currentUser == null)
+            {
+                return false;
+            }
+
+            currentUser.IsDeleted = true;
+            _dbContext.Users.Update(currentUser);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<User> GetByIdAsync(int userId)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId && !u.IsDeleted);
 
@@ -40,9 +57,11 @@ namespace CodeSense.Infrastructure.Services
             return user;
         }
 
-        public async Task<User> GetUserByEmailAsync(string email)
+        public async Task<User> GetByEmailAsync(string email)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+
+            return user ?? new();
         }
 
         public IEnumerable<User> GetUsers()
@@ -55,9 +74,9 @@ namespace CodeSense.Infrastructure.Services
             return user;
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<User> UpdateAsync(User user)
         {
-            var currentUser = await GetUserAsync(user.Id);
+            var currentUser = await GetByIdAsync(user.Id);
             if (currentUser == null)
             {
                 return new();

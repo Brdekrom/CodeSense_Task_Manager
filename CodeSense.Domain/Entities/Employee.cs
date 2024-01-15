@@ -9,7 +9,7 @@ public class Employee : EntityBase
     public string LastName { get; set; }
     public string Position { get; set; }
     public int Salary { get; set; }
-    public ClientCompany? ClientCompany { get; set; }
+    public Company? ClientCompany { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
     public DateOnly AvailableFrom { get; set; }

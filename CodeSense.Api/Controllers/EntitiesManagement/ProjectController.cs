@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using CodeSense.Application.Abstractions;
-using CodeSense.Domain.DTOs;
-using CodeSense.Domain.Entities;
-using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CodeSense.Api.Controllers.EntitiesManagement;
 
@@ -11,6 +6,8 @@ namespace CodeSense.Api.Controllers.EntitiesManagement;
 [Route("api/[controller]")]
 public class ProjectController : ControllerBase
 {
+    // This is commented out because it will be refactored soon.
+
     //private readonly IValidator<Project> _projectValidator;
     //private readonly IMapper _mapper;
 

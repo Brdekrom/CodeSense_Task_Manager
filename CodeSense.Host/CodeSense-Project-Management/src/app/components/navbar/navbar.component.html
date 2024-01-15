@@ -12,23 +12,17 @@
           <a class="nav-link active" routerLink="/home" aria-current="page">Home</a>
         </li>
         
-        @if(!(_auth.isAuthenticated$ | async))
-        {
         <li class="nav-item">
-          <a class="nav-link" (click) ="_auth.loginWithRedirect()">Log in</a>
+          <a class="nav-link">Log in</a>
         </li>
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/register/user">Sign up</a>
         </li>
-        }
-        @else
-        {
+        
           <li class="nav-item">
-            <a class="nav-link" (click) = "_auth.logout()">Log out</a>
+            <a class="nav-link" >Log out</a>
           </li>
-        }
-
         
         <!-- Add more nav items with corresponding routerLinks here -->
       </ul>

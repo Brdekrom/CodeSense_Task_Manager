@@ -6,8 +6,6 @@ using CodeSense.Infrastructure;
 using CodeSense.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,18 +28,10 @@ builder.Services.AddAuthentication(x =>
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
+}).AddJwtBearer(options =>
 {
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings!.Issuer,
-        ValidAudience = jwtSettings.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
-    };
+    options.Authority = jwtSettings!.Issuer;
+    options.Audience = jwtSettings.Audience;
 });
 
 builder.Services.AddAuthorization();

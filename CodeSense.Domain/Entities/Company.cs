@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeSense.Domain.Entities
 {
-    public class ClientCompany : EntityBase
+    public class Company : EntityBase
     {
         public string Name { get; set; }
         public string PrimaryEmail { get; set; }

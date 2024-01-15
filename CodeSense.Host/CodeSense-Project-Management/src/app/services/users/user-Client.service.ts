@@ -3,15 +3,19 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { User } from '../../interfaces/user';
 import { CreateUserRequest } from 'src/app/interfaces/messages/create-user-request';
+import { BaseUrlService } from '../base/base-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserClientService {
 
-  private apiUrl = 'http://localhost:5007/api/authentication'; // Update this URL
+  private apiUrl = '/authentication';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, uri: BaseUrlService) 
+  {
+    this.apiUrl = uri.getBaseUrl() + this.apiUrl;
+   }
 
   // Get all users
   getUsers(): Observable<User[]> {
