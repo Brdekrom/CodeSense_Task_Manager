@@ -1,4 +1,4 @@
-﻿using CodeSense.Domain.Entities;
+﻿using CodeSense.Application.DTOs;
 using MediatR;
 
 namespace CodeSense.Application.Commands.Company
@@ -8,6 +8,6 @@ namespace CodeSense.Application.Commands.Company
         public string Name { get; set; }
         public string PrimaryEmail { get; set; }
         public string PrimaryPhoneNumber { get; set; }
-        public Address Address { get; set; }
+        public AddressDto Address { get; set; }
     }
 }
