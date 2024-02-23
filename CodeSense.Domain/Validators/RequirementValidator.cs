@@ -1,5 +1,5 @@
 ﻿using CodeSense.Domain.Common.Constants;
-using CodeSense.Domain.Entities;
+using CodeSense.Domain.ValueObjects;
 using FluentValidation;
 
 namespace CodeSense.Domain.Validators;

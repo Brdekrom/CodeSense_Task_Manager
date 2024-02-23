@@ -2,7 +2,7 @@
 
 using AutoMapper;
 using CodeSense.Application.Abstractions;
-using CodeSense.Domain.Common.Constants;
+using CodeSense.Domain.Common.Enum;
 using CodeSense.Domain.DTOs;
 using CodeSense.Domain.Entities;
 using FluentValidation;
@@ -28,18 +28,18 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
 
         foreach (var requirement in project.Requirements)
         {
-            if (employeesByLevel.TryGetValue(requirement.Position, out List<Employee>? employeesOfLevel))
+            if (employeesByLevel.TryGetValue(requirement.RequiredEmployees.Level.ToString(), out List<Employee>? employeesOfLevel))
             {
-                var employeesToTake = Math.Min(employeesOfLevel.Count, requirement.RequiredEmployees);
+                var employeesToTake = Math.Min(employeesOfLevel.Count, requirement.RequiredEmployees.Quantity);
                 var chosenEmployees = employeesOfLevel.Take(employeesToTake);
                 employeeList.AddRange(chosenEmployees);
                 employeesOfLevel.RemoveRange(0, employeesToTake);
-                requirement.RequiredEmployees -= employeesToTake;
+                requirement.RequiredEmployees = requirement.RequiredEmployees with { Quantity = requirement.RequiredEmployees.Quantity - employeesToTake };
             }
 
-            if (requirement.RequiredEmployees > 0)
+            if (requirement.RequiredEmployees.Quantity > 0)
             {
-                GetNextHigherLevel(requirement.Position, requirement.RequiredEmployees, employeesByLevel, employeeList);
+                GetNextHigherLevel(requirement.RequiredEmployees.Level, requirement.RequiredEmployees.Quantity, employeesByLevel, employeeList);
             }
         }
 
@@ -71,7 +71,7 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
 
     private static IDictionary<string, List<Employee>> SortEmployeesByLevel(IList<Employee> employees)
     => employees
-            .GroupBy(employee => employee.Level)
+            .GroupBy(employee => employee.Level.ToString())
             .ToDictionary(x => x.Key, x => x.ToList());
 
     private List<Employee> GetAvailableEmployees()
@@ -85,18 +85,18 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
         //.ToList();
     }
 
-    private static void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)
+    private static void GetNextHigherLevel(EmployeeLevel requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)
     {
         while (requiredAmount > 0)
         {
             var nextHigherLevel = NextHigherLevel(requiredLevel);
 
-            if (string.IsNullOrEmpty(nextHigherLevel) || !employeesByLevel.ContainsKey(nextHigherLevel))
+            if (string.IsNullOrEmpty(nextHigherLevel.ToString()) || !employeesByLevel.ContainsKey(nextHigherLevel.ToString()))
             {
                 break;
             }
 
-            var higherLevelEmployees = employeesByLevel[nextHigherLevel];
+            var higherLevelEmployees = employeesByLevel[nextHigherLevel.ToString()];
             var toTake = Math.Min(higherLevelEmployees.Count, requiredAmount);
             var choosenEmployees = higherLevelEmployees.Take(toTake);
             employeeList.AddRange(choosenEmployees);
@@ -105,12 +105,12 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
         }
     }
 
-    private static string NextHigherLevel(string currentLevel)
+    private static EmployeeLevel NextHigherLevel(EmployeeLevel currentLevel)
         => currentLevel switch
         {
             EmployeeLevel.Junior => EmployeeLevel.Medior,
             EmployeeLevel.Medior => EmployeeLevel.Senior,
             EmployeeLevel.Senior => EmployeeLevel.Architect,
-            _ => string.Empty
+            _ => currentLevel
         };
 }

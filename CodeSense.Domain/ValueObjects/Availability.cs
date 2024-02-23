@@ -1,6 +1,7 @@
 ﻿namespace CodeSense.Domain.ValueObjects;
 
-public record Availability(DateOnly Start, DateOnly End)
+public record Availability(DateOnly From, DateOnly? Until = null)
 {
-    public bool IsAvailable => Start < DateOnly.FromDateTime(DateTime.Today) && End > DateOnly.FromDateTime(DateTime.Today);
+    public bool IsAvailable
+        => Until is null || From <= DateOnly.FromDateTime(DateTime.Today) && Until >= DateOnly.FromDateTime(DateTime.Today);
 }

@@ -1,3 +1,3 @@
 ﻿namespace CodeSense.Domain.ValueObjects;
 
-public record ContactData(string PrimaryEmail, ICollection<string>? SecondaryEmails, string PrimaryPhoneNumber, ICollection<string>? SecondaryPhoneNumbers);
+public record ContactData(string PrimaryEmail, string PrimaryPhoneNumber, ICollection<string>? SecondaryEmails = default, ICollection<string>? SecondaryPhoneNumbers = default);

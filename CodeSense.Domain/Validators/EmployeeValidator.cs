@@ -1,4 +1,4 @@
-﻿using CodeSense.Domain.Common.Constants;
+﻿using CodeSense.Domain.Common.Enum;
 using CodeSense.Domain.Entities;
 using FluentValidation;
 
@@ -17,14 +17,14 @@ public class EmployeeValidator : AbstractValidator<Employee>
             .Must(x => new[] { EmployeeLevel.Junior, EmployeeLevel.Medior, EmployeeLevel.Senior, EmployeeLevel.Architect, EmployeeLevel.PM }.Contains(x))
             .WithMessage("Level must be one of the following: Junior Developer, Medior Developer, Senior Developer, Architect, PM");
 
-        RuleFor(x => x.DailySalary)
+        RuleFor(x => x.FinancialData.DailySalary)
             .GreaterThanOrEqualTo(1).WithMessage("Cost must be zero or greater.");
 
-        RuleFor(x => x.AvailableFrom)
+        RuleFor(x => x.Availability.From)
             .NotEmpty().WithMessage("Available From date is required.");
 
-        RuleFor(x => x.AvailableUntil)
+        RuleFor(x => x.Availability.Until)
             .NotEmpty().WithMessage("Available Until date is required.")
-            .GreaterThan(x => x.AvailableFrom).WithMessage("Available Until must be after Available From.");
+            .GreaterThan(x => x.Availability.Until).WithMessage("Available Until must be after Available From.");
     }
 }

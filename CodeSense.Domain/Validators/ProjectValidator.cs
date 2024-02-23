@@ -7,7 +7,7 @@ public class ProjectValidator : AbstractValidator<Project>
 {
     public ProjectValidator()
     {
-        RuleFor(x => x.Title)
+        RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Title is required.")
             .MaximumLength(100).WithMessage("Title cannot be longer than 100 characters.");
 

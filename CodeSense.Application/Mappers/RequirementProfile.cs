@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CodeSense.Domain.DTOs;
-using CodeSense.Domain.Entities;
+using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Application.Mappers;
 

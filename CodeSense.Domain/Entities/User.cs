@@ -25,6 +25,17 @@ public class User : EntityBase
         return LoginData.Email;
     }
 
+    public string GetHashedPassword()
+    {
+        return LoginData.Password;
+    }
+
+    public string UpdatePassword(string newPassword)
+    {
+        LoginData = LoginData with { Password = newPassword };
+        return LoginData.Password;
+    }
+
     public string GetFullName()
     {
         return $"{UserContactData.FirstName} {UserContactData.LastName}";

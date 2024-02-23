@@ -1,18 +1,3 @@
-﻿using CodeSense.Domain.Entities;
+﻿namespace CodeSense.Domain.ValueObjects;
 
-namespace CodeSense.Domain.ValueObjects
-{
-    public class Address
-    {
-        public int ClientCompanyId { get; set; }
-        public string Street { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
-        public string Country { get; set; }
-        public bool IsPrimary { get; set; }
-
-        // navigational properties
-        public Company ClientCompany { get; set; }
-    }
-}
+public record Address(string Street, string City, string State, string ZipCode, Country Country, bool IsPrimary = false);

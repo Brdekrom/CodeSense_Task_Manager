@@ -1,4 +1,4 @@
-﻿namespace CodeSense.Domain.Common.Enum,;
+﻿namespace CodeSense.Domain.Common.Enum;
 
 public enum EmployeeLevel
 {

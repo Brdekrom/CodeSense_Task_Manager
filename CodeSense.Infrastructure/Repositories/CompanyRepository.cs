@@ -14,8 +14,8 @@ namespace CodeSense.Infrastructure.Repositories
             _dbContext.Companies.Add(company);
             await _dbContext.SaveChangesAsync();
 
-            var createdCompany = await GetByEmailAsync(company.PrimaryEmail);
-            return createdCompany.Id != default ? createdCompany : new();
+            var createdCompany = await GetByEmailAsync(company.ContactData.PrimaryEmail);
+            return createdCompany;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -39,7 +39,7 @@ namespace CodeSense.Infrastructure.Repositories
 
         public async Task<Company> GetByEmailAsync(string email)
         {
-            var company = await _dbContext.Companies.FirstOrDefaultAsync(x => x.PrimaryEmail == email && !x.IsDeleted);
+            var company = await _dbContext.Companies.FirstOrDefaultAsync(x => x.ContactData.PrimaryEmail == email && !x.IsDeleted);
             return company;
         }
 

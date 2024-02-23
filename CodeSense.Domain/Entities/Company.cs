@@ -3,23 +3,15 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class Company : EntityBase
+public class Company(string name, ContactData contactData, Address address) : EntityBase
 {
-    public string Name { get; private set; }
-    public ContactData ContactData { get; private set; }
-    public Address MainAddress { get; private set; }
-    public ICollection<Address> Addresses { get; private set; }
+    public string Name { get; private set; } = name;
+    public ContactData ContactData { get; private set; } = contactData;
+    public Address MainAddress { get; private set; } = address;
+    public ICollection<Address> Addresses { get; private set; } = new List<Address>();
     public ICollection<User>? Users { get; private set; }
     public ICollection<Employee>? Employees { get; private set; }
     public ICollection<Project>? Projects { get; private set; }
-
-    public Company(string name, ContactData contactData, Address address)
-    {
-        Name = name;
-        ContactData = contactData;
-        MainAddress = address;
-        Addresses = new List<Address>();
-    }
 
     public void UpdateName(string name)
     {
@@ -28,6 +20,12 @@ public class Company : EntityBase
 
     public void AddAddress(Address address)
     {
+        if (address.IsPrimary)
+        {
+            MainAddress = address;
+            return;
+        }
+        Addresses ??= new List<Address>();
         Addresses.Add(address);
     }
 

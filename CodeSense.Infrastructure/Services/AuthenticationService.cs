@@ -1,8 +1,6 @@
 ﻿using CodeSense.Application.Abstractions;
 using CodeSense.Domain.Entities;
-using CodeSense.Domain.Validators;
 using CodeSense.Infrastructure.Persistence;
-using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,32 +13,29 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
     private readonly CodeSenseDbContext _context = context;
     private readonly IPasswordHasher<User> _passwordHasher = passwordHasher;
 
-
     public async Task<bool> LoginAsync(User loginUser)
     {
-
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginUser.Email && u.IsDeleted == false);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.GetEmail() == loginUser.GetEmail() && !u.IsDeleted);
 
         if (user == null)
         {
             return false;
         }
 
-        var result = _passwordHasher.VerifyHashedPassword(user, user.Password, loginUser.Password);
+        var result = _passwordHasher.VerifyHashedPassword(user, user.GetHashedPassword(), loginUser.GetHashedPassword());
 
         return result == PasswordVerificationResult.Success;
     }
 
     public async Task<bool> RegisterAsync(User user)
     {
-
-        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email && u.IsDeleted == false);
+        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => u.GetEmail() == user.GetEmail() && !u.IsDeleted);
         if (checkExistence is not null)
         {
             return false;
         }
 
-        user.Password = _passwordHasher.HashPassword(user, user.Password);
+        user.UpdatePassword(_passwordHasher.HashPassword(user, user.GetHashedPassword()));
 
         await _context.Users.AddAsync(user);
         await _context.SaveChangesAsync();
@@ -50,8 +45,7 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
 
     public async Task<bool> UnregisterAsync(User user)
     {
-
-        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => !(u.Email != user.Email && u.IsDeleted == false));
+        var checkExistence = await _context.Users.FirstOrDefaultAsync(u => !(u.GetEmail() != user.GetEmail() && !u.IsDeleted));
         if (checkExistence is null)
         {
             return false;
@@ -64,6 +58,4 @@ public class AuthenticationService(CodeSenseDbContext context, IPasswordHasher<U
 
         return true;
     }
-
-    
 }
