@@ -13,6 +13,7 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
 {
     // Add employee service after creating it
     private readonly IMapper _mapper = mapper;
+
     private readonly IValidator<Project> _projectValidator = projectValidator;
 
     public List<EmployeeDTO> Handle(ProjectDTO projectDto)
@@ -70,18 +71,18 @@ public class ProjectHandlerService(IMapper mapper, IValidator<Project> projectVa
 
     private static IDictionary<string, List<Employee>> SortEmployeesByLevel(IList<Employee> employees)
     => employees
-            .GroupBy(employee => employee.Position)
+            .GroupBy(employee => employee.Level)
             .ToDictionary(x => x.Key, x => x.ToList());
 
     private List<Employee> GetAvailableEmployees()
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Now);
         return new List<Employee>();
-            
-            //_employeeService
-                            //.GetAll()
-                            //.Where(x => x.AvailableFrom <= today && x.AvailableUntil >= today)
-                            //.ToList();
+
+        //_employeeService
+        //.GetAll()
+        //.Where(x => x.AvailableFrom <= today && x.AvailableUntil >= today)
+        //.ToList();
     }
 
     private static void GetNextHigherLevel(string requiredLevel, int requiredAmount, IDictionary<string, List<Employee>> employeesByLevel, List<Employee> employeeList)

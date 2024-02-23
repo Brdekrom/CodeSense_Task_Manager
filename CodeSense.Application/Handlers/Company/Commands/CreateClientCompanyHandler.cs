@@ -1,5 +1,6 @@
 ﻿using CodeSense.Application.Abstractions;
 using CodeSense.Application.Commands.Company;
+using CodeSense.Domain.ValueObjects;
 using MediatR;
 
 namespace CodeSense.Application.Handlers.Company.Commands
@@ -25,7 +26,7 @@ namespace CodeSense.Application.Handlers.Company.Commands
                 Name = request.Name,
                 PrimaryEmail = request.PrimaryEmail,
                 PrimaryPhoneNumber = request.PrimaryPhoneNumber,
-                Addresses = new List<Domain.Entities.Address> { mappedAddress }
+                Addresses = new List<Address> { mappedAddress }
             };
 
             var company = await _repository.CreateAsync(mappedCompany);

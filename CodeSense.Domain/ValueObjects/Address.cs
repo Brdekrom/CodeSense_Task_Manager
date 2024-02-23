@@ -1,8 +1,8 @@
-﻿using CodeSense.Domain.Abstractions;
+﻿using CodeSense.Domain.Entities;
 
-namespace CodeSense.Domain.Entities
+namespace CodeSense.Domain.ValueObjects
 {
-    public class Address : EntityBase
+    public class Address
     {
         public int ClientCompanyId { get; set; }
         public string Street { get; set; }
