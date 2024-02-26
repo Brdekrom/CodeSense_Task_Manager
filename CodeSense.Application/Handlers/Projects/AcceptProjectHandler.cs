@@ -18,13 +18,13 @@ public class AcceptProjectHandler(IRepository<Company> companyRepository) : IReq
 
     public async Task Handle(AcceptProjectCommand request, CancellationToken cancellationToken)
     {
-        var consultancy = await _companyRepository.GetByIdAsync(request.ConsultancyId);
-        var clientCompany = await _companyRepository.GetByIdAsync(request.ClientCompanyId);
-        if (clientCompany is null)
+        if (!request.Project.IsProfitable())
         {
-            throw new NullReferenceException("Client Company not found");
+            throw new Exception("This project is not profitable");
         }
 
+        var consultancy = await _companyRepository.GetByIdAsync(request.ConsultancyId);
+        var clientCompany = await _companyRepository.GetByIdAsync(request.ClientCompanyId) ?? throw new NullReferenceException("Client Company not found");
         if (consultancy.IsClient || !clientCompany.IsClient)
         {
             throw new NullReferenceException(clientCompany.IsClient ? "Consultancy is a client" : "Client Company is not a client");

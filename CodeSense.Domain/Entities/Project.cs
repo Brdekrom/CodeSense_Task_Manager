@@ -90,6 +90,21 @@ public class Project(string name, Company clientCompany, ProjectDates projectDat
         CalculateProjectCost();
     }
 
+    public bool IsProfitable()
+    {
+        if (FinancialData is null)
+        {
+            throw new Exception("There is no financial data available for the project");
+        }
+
+        return FinancialData.IsProfitable;
+    }
+
+    public void MarkAsCompleted()
+    {
+        IsCompleted = true;
+    }
+
     private void CalculateProjectCost()
     {
         if (FinancialData is null)
@@ -99,10 +114,5 @@ public class Project(string name, Company clientCompany, ProjectDates projectDat
 
         var totalDailyCost = Employees!.Sum(employee => employee.FinancialData!.DailySalary);
         FinancialData = FinancialData with { Cost = totalDailyCost };
-    }
-
-    public void MarkAsCompleted()
-    {
-        IsCompleted = true;
     }
 }
