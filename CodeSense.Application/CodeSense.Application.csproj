@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CodeSense.Domain\CodeSense.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\Employees\" />
+  </ItemGroup>
+
 </Project>

@@ -19,7 +19,7 @@ public class TokenService(JwtSettings jwtSettings)
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Email, user.GetEmail()),
             }),
             Expires = DateTime.UtcNow.AddMinutes(30),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),

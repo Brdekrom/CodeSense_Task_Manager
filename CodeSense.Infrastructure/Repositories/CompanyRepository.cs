@@ -45,12 +45,20 @@ namespace CodeSense.Infrastructure.Repositories
 
         public async Task<Company> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var company = await _dbContext.Companies.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+            return company ?? throw new NullReferenceException("Company not found");
         }
 
         public async Task<Company> UpdateAsync(Company company)
         {
-            throw new NotImplementedException();
+            _dbContext.Companies.Update(company);
+            await _dbContext.SaveChangesAsync();
+            return company;
+        }
+
+        public async Task SaveChanges()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

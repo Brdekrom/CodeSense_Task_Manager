@@ -1,5 +1,5 @@
 ﻿using CodeSense.Application.Abstractions;
-using CodeSense.Domain.DTOs;
+using CodeSense.Domain.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +13,12 @@ public class ProjectManagementController(
     private readonly IProjectService _projectService = projectService;
 
     [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] ProjectDTO dTO)
+    [Route("quote")]
+    public async Task<IActionResult> PostAsync([FromBody] Project project)
     {
         try
         {
-            var employees = _projectService.Handle(dTO);
+            var employees = await _projectService.HandleAsync(project);
 
             return Ok(employees);
         }

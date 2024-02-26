@@ -13,14 +13,14 @@ namespace CodeSense.Infrastructure.Repositories
 
         public async Task<User> CreateAsync(User user)
         {
-            user.Password = _passwordHasher.HashPassword(user, user.Password);
+            user.UpdatePassword(_passwordHasher.HashPassword(user, user.GetHashedPassword()));
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            user = await GetByEmailAsync(user.Email);
+            user = await GetByEmailAsync(user.GetEmail());
 
-            return user.Id != default ? user : new();
+            return user;
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -51,7 +51,7 @@ namespace CodeSense.Infrastructure.Repositories
 
             if (user == null)
             {
-                return new();
+                throw new Exception("User not found");
             }
 
             return user;
@@ -59,9 +59,9 @@ namespace CodeSense.Infrastructure.Repositories
 
         public async Task<User> GetByEmailAsync(string email)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.GetEmail() == email && !u.IsDeleted);
 
-            return user ?? new();
+            return user ?? throw new Exception("User not found");
         }
 
         public IEnumerable<User> GetUsers()
@@ -79,20 +79,18 @@ namespace CodeSense.Infrastructure.Repositories
             var currentUser = await GetByIdAsync(user.Id);
             if (currentUser == null)
             {
-                return new();
+                throw new Exception("User not found");
             }
 
-            currentUser.FirstName = user.FirstName;
-            currentUser.LastName = user.LastName;
-            currentUser.Email = user.Email;
-            currentUser.Password = _passwordHasher.HashPassword(user, user.Password);
-            currentUser.ClientCompanyId = user.ClientCompanyId;
-            currentUser.Phone = user.Phone;
-
-            _dbContext.Users.Update(currentUser);
+            _dbContext.Users.Entry(currentUser).CurrentValues.SetValues(user);
             await _dbContext.SaveChangesAsync();
 
             return currentUser;
+        }
+
+        public async Task SaveChanges()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using CodeSense.Application.Abstractions;
-using CodeSense.Application.Commands.Users;
+using CodeSense.Application.Handlers.Users.Commands;
 using CodeSense.Application.Services;
 using CodeSense.Domain.Entities;
 using FluentValidation;

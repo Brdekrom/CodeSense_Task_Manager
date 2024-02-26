@@ -3,19 +3,41 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class Company(string name, ContactData contactData, Address address) : EntityBase
+public class Company(string vatNumber, string name, ContactData contactData, Address address, bool IsClient) : EntityBase
 {
+    public string VATNumber { get; private set; } = vatNumber;
     public string Name { get; private set; } = name;
     public ContactData ContactData { get; private set; } = contactData;
     public Address MainAddress { get; private set; } = address;
+    public FinancialData? FinancialData { get; private set; }
     public ICollection<Address> Addresses { get; private set; } = new List<Address>();
     public ICollection<User>? Users { get; private set; }
     public ICollection<Employee>? Employees { get; private set; }
     public ICollection<Project>? Projects { get; private set; }
+    public ICollection<ProjectQuote>? ProjectQuotes { get; private set; }
+    public bool IsClient { get; private set; } = IsClient;
 
     public void UpdateName(string name)
     {
         Name = name;
+    }
+
+    public void AddQuote(ProjectQuote projectQuote)
+    {
+        ProjectQuotes ??= new List<ProjectQuote>();
+
+        ProjectQuotes.Add(projectQuote);
+    }
+
+    public void AddEmployeeToProject(Employee employee, Project project)
+    {
+        employee.SetClientCompany(this);
+        employee.SetProject(project);
+    }
+
+    public void UpdateFinancialData(FinancialData financialData)
+    {
+        FinancialData = financialData;
     }
 
     public void AddAddress(Address address)

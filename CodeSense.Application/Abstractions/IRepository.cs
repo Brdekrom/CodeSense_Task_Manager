@@ -56,5 +56,7 @@ namespace CodeSense.Application.Abstractions
         /// True if the entity was deleted, false if the entity was not found
         /// </returns>
         Task<bool> DeleteAsync(int id);
+
+        Task SaveChanges();
     }
 }

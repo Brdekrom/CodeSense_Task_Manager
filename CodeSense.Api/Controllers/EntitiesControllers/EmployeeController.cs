@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CodeSense.Application.Abstractions;
 using CodeSense.Domain.DTOs;
 using CodeSense.Domain.Entities;
 using FluentValidation;
@@ -27,17 +26,6 @@ public class EmployeeController : ControllerBase
     [HttpPost]
     public IActionResult CreateEmployee([FromBody] EmployeeDTO dTO)
     {
-        //var employee = _mapper.Map<Employee>(dTO);
-
-        //var validationResult = _employeeValidator.Validate(employee);
-
-        //if (!validationResult.IsValid)
-        //    return BadRequest(ModelState);
-
-        //var createdEmployee = //_employeeService.Create(employee);
-
-        //return CreatedAtAction(nameof(GetEmployeeById), new { id = createdEmployee.Id }, createdEmployee);
-
         throw new NotImplementedException();
     }
 

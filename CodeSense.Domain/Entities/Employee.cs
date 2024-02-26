@@ -4,20 +4,20 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class Employee(string firstName, string lastName, Company employerCompany, ContactData contactData, EmployeeLevel employeeLevel) : EntityBase
+public class Employee(string firstName, string lastName, Company employerCompany, ContactData contactData, EmployeeLevel employeeLevel, EmployeeFinancialData employeeFinancialData) : EntityBase
 {
-    public int ProjectId { get; private set; }
+    public int? ProjectId { get; private set; }
     public string FirstName { get; private set; } = firstName;
     public string LastName { get; private set; } = lastName;
     public ContactData? ContactData { get; private set; } = contactData;
     public Company? EmployerCompany { get; private set; } = employerCompany;
     public EmployeeLevel Level { get; private set; } = employeeLevel;
-    public EmployeeFinancialData? FinancialData { get; private set; }
+    public EmployeeFinancialData? FinancialData { get; private set; } = employeeFinancialData;
     public Company? ClientCompany { get; private set; }
     public Availability Availability { get; private set; } = new Availability(DateOnly.FromDateTime(DateTime.Today));
 
     // navigational properties
-    public Project Project { get; private set; }
+    public Project? Project { get; private set; }
 
     public void SetClientCompany(Company clientCompany)
     {
@@ -31,9 +31,14 @@ public class Employee(string firstName, string lastName, Company employerCompany
             throw new Exception("There is no financial data available for the employee");
         }
 
-        var incomeFare = FinancialData.DailySalary * 1.15;
+        if (FinancialData.DailySalary is null)
+        {
+            throw new Exception("The daily salary is not set for the employee");
+        }
 
-        return (int)incomeFare;
+        var dailyPrice = FinancialData.DailySalary * 1.15;
+
+        return (int)dailyPrice;
     }
 
     public int SetDailyPrice(int price)

@@ -1,3 +1,5 @@
-﻿namespace CodeSense.Domain.ValueObjects;
+﻿using CodeSense.Domain.Enums;
 
-public record Address(string Street, string City, string State, string ZipCode, Country Country, bool IsPrimary = false);
+namespace CodeSense.Domain.ValueObjects;
+
+public record Address(string Street, string City, string State, string ZipCode, EUCountries Country, bool IsPrimary = false);

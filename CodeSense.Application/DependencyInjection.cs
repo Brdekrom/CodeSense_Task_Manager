@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<IProjectService, ProjectHandlerService>()
+        services.AddScoped<IProjectService, ProjectQuoteService>()
                 .AddSingleton<JwtSettings>()
                 .AddSingleton<TokenService>();
 

@@ -1,94 +1,62 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CodeSense.Application.Handlers.Projects;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CodeSense.Api.Controllers.EntitiesManagement;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectController : ControllerBase
+public class ProjectController(IMediator mediator) : ControllerBase
 {
-    // This is commented out because it will be refactored soon.
+    private readonly IMediator _mediator = mediator;
 
-    //private readonly IValidator<Project> _projectValidator;
-    //private readonly IMapper _mapper;
+    [HttpPost]
+    [Route("quote")]
+    public async Task<IActionResult> QuoteProject([FromBody] QuoteProjectCommand command)
+    {
+        var result = await _mediator.Send(command);
 
-    //public ProjectController(
-    //    IValidator<Project> projectValidator,
-    //    IMapper mapper)
-    //{
-    //    _projectValidator = projectValidator;
-    //    _mapper = mapper;
-    //}
+        return Ok(result);
+    }
 
-    //[HttpPost]
-    //public IActionResult CreateProject([FromBody] ProjectDTO dTO)
-    //{
-    //    var project = _mapper.Map<Project>(dTO);
+    [HttpGet]
+    public async Task<IActionResult> GetProjects()
+    {
+        throw new NotImplementedException();
+    }
 
-    //    var validationResult = _projectValidator.Validate(project);
-    //    if (!validationResult.IsValid)
-    //    {
-    //        return BadRequest(validationResult.Errors);
-    //    }
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetProject(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-    //    var createdProject = _projectService.Create(project);
-    //    return CreatedAtAction(nameof(GetProjectById), new { id = createdProject.Id }, _mapper.Map<ProjectDTO>(createdProject));
-    //}
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<IActionResult> UpdateProject(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-    //[HttpGet]
-    //public IActionResult GetAllProjects()
-    //{
-    //    var projects = _projectService.GetAll()
-    //        .Select(_mapper.Map<ProjectDTO>)
-    //        .ToList();
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteProject(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-    //    return Ok(projects);
-    //}
+    [HttpGet]
+    [Route("{id}/requirements")]
+    public async Task<IActionResult> GetProjectRequirements(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-    //[HttpGet("{id}")]
-    //public IActionResult GetProjectById(int id)
-    //{
-    //    var project = _projectService.GetById(id);
-    //    if (project is null)
-    //    {
-    //        return NotFound();
-    //    }
-    //    return Ok(_mapper.Map<ProjectDTO>(project));
-    //}
-
-    //[HttpPut("{id}")]
-    //public IActionResult UpdateProject(int id, [FromBody] ProjectDTO dTO)
-    //{
-    //    var project = _mapper.Map<Project>(dTO);
-    //    if (id != project.Id)
-    //    {
-    //        return BadRequest("Project ID mismatch.");
-    //    }
-
-    //    var validationResult = _projectValidator.Validate(project);
-
-    //    if (!validationResult.IsValid)
-    //        return BadRequest(ModelState);
-
-    //    var updatedProject = _projectService.Update(project);
-
-    //    if (updatedProject is null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    return Ok(_mapper.Map<ProjectDTO>(updatedProject));
-    //}
-
-    //[HttpDelete("{id}")]
-    //public IActionResult DeleteProject(int id)
-    //{
-    //    var project = _projectService.GetById(id);
-    //    if (project is null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    _projectService.Delete(id);
-    //    return NoContent();
-    //}
+    [HttpGet]
+    [Route("{id}/employees")]
+    public async Task<IActionResult> GetProjectEmployees(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

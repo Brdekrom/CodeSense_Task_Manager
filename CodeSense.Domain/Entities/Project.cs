@@ -68,6 +68,8 @@ public class Project(string name, Company company, ProjectDates projectDates) : 
         Employees ??= new List<Employee>();
 
         Employees.Add(employee);
+
+        CalculateProjectCost();
     }
 
     public void AddEmployees(IEnumerable<Employee> employees)
@@ -77,6 +79,19 @@ public class Project(string name, Company company, ProjectDates projectDates) : 
 
         employeesList.AddRange(employees);
         Employees = employeesList;
+
+        CalculateProjectCost();
+    }
+
+    private void CalculateProjectCost()
+    {
+        if (FinancialData is null)
+        {
+            throw new Exception("There is no financial data available for the project");
+        }
+
+        var totalDailyCost = Employees!.Sum(employee => employee.FinancialData!.DailySalary);
+        FinancialData = FinancialData with { Cost = totalDailyCost };
     }
 
     public void MarkAsCompleted()
