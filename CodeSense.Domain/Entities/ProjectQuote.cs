@@ -2,11 +2,12 @@
 
 namespace CodeSense.Domain.Entities;
 
-public class ProjectQuote(Project project, int companyId, int clientCompanyId) : EntityBase
+public class ProjectQuote(Project project, int consultancyId, int clientCompanyId) : EntityBase
 {
-    public int CompanyId { get; private set; } = companyId;
+    public int ConsultancyId { get; private set; } = consultancyId;
     public int ClientCompanyId { get; private set; } = clientCompanyId;
     public bool IsAccepted { get; private set; } = false;
+    public bool IsDue { get => IsAccepted || CreatedAt.AddHours(48) < DateTime.Now; }
     public Project Project { get; } = project;
 
     public void AcceptQuote()

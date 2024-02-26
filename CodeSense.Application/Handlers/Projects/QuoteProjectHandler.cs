@@ -7,7 +7,7 @@ namespace CodeSense.Application.Handlers.Projects;
 
 public class QuoteProjectCommand : IRequest<Project>
 {
-    public int CompanyId { get; set; }
+    public int ConsultancyId { get; set; }
     public int ClientCompanyId { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }
@@ -23,10 +23,11 @@ public class QuoteProjectHandler(IProjectService projectService, IRepository<Com
 
     public async Task<Project> Handle(QuoteProjectCommand request, CancellationToken cancellationToken)
     {
-        var company = await _companyRepository.GetByIdAsync(request.CompanyId);
+        var consultancy = await _companyRepository.GetByIdAsync(request.ConsultancyId);
+        var clientCompany = await _companyRepository.GetByIdAsync(request.ClientCompanyId);
 
-        var project = new Project(request.Name, company, request.ProjectDates);
-
+        var project = new Project(request.Name, clientCompany, request.ProjectDates);
+        project.AddConsultancy(consultancy.Id);
         project.SetDescription(request.Description ?? string.Empty);
         project.SetFinancialData(request.FinancialData);
 
@@ -42,9 +43,9 @@ public class QuoteProjectHandler(IProjectService projectService, IRepository<Com
 
         var quotedProject = await _projectService.HandleAsync(project);
 
-        company.AddQuote(new ProjectQuote(quotedProject, company.Id, request.ClientCompanyId));
+        consultancy.AddQuote(new ProjectQuote(quotedProject, consultancy.Id, request.ClientCompanyId));
 
-        await _companyRepository.UpdateAsync(company);
+        await _companyRepository.UpdateAsync(consultancy);
         await _companyRepository.SaveChanges();
 
         return quotedProject;

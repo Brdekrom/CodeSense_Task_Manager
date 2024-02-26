@@ -29,6 +29,16 @@ public class Company(string vatNumber, string name, ContactData contactData, Add
         ProjectQuotes.Add(projectQuote);
     }
 
+    public void QuoteAccepted(Guid quoteId)
+    {
+        ProjectQuotes ??= new List<ProjectQuote>();
+        var quote = ProjectQuotes.FirstOrDefault(x => x.Project.QuoteId == quoteId) ?? throw new Exception("Quote not found");
+        quote.AcceptQuote();
+
+        Projects ??= new List<Project>();
+        Projects.Add(quote.Project);
+    }
+
     public void AddEmployeeToProject(Employee employee, Project project)
     {
         employee.SetClientCompany(this);
@@ -97,6 +107,14 @@ public class Company(string vatNumber, string name, ContactData contactData, Add
         Projects ??= new List<Project>();
 
         Projects.Add(project);
+
+        Employees ??= new List<Employee>();
+        foreach (var employee in project.Employees!)
+        {
+            employee.SetClientCompany(project.ClientCompany);
+            employee.SetProject(project);
+            Employees.Add(employee);
+        }
     }
 
     public void AddProjects(IEnumerable<Project> projects)

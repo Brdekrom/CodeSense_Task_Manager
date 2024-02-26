@@ -9,7 +9,7 @@ using System.Linq;
 
 public class ProjectQuoteService(IRepository<Company> repository) : IProjectService
 {
-    private Company _employerCompany;
+    private Company _consultancy;
     private readonly IRepository<Company> _repository = repository;
 
     public async Task<Project> HandleAsync(Project project)
@@ -18,7 +18,7 @@ public class ProjectQuoteService(IRepository<Company> repository) : IProjectServ
         {
             throw new ValidationException("Project is null");
         }
-        await GetCompany(project.CompanyId);
+        await GetConsultancy(project.ConsultancyId);
 
         var availableEmployees = GetAvailableEmployees();
         var employeesByLevel = SortEmployeesByLevel(availableEmployees);
@@ -71,12 +71,12 @@ public class ProjectQuoteService(IRepository<Company> repository) : IProjectServ
 
     private List<Employee> GetAvailableEmployees()
     {
-        if (_employerCompany.Employees is null)
+        if (_consultancy.Employees is null)
         {
             throw new NullReferenceException("No Employee available for this project");
         }
 
-        var availableEmployees = _employerCompany.Employees
+        var availableEmployees = _consultancy.Employees
                                     .Where(employee => employee.Availability.IsAvailable)
                                     .ToList();
 
@@ -117,10 +117,10 @@ public class ProjectQuoteService(IRepository<Company> repository) : IProjectServ
             _ => currentLevel
         };
 
-    private async Task GetCompany(int id)
+    private async Task GetConsultancy(int id)
     {
-        _employerCompany = await _repository.GetByIdAsync(id);
-        if (_employerCompany is null)
+        _consultancy = await _repository.GetByIdAsync(id);
+        if (_consultancy is null)
         {
             throw new NullReferenceException("Company not found");
         }

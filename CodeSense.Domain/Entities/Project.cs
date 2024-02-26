@@ -3,9 +3,11 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class Project(string name, Company company, ProjectDates projectDates) : EntityBase
+public class Project(string name, Company clientCompany, ProjectDates projectDates) : EntityBase
 {
-    public int CompanyId { get; private set; } = company.Id;
+    public Guid QuoteId { get; private set; } = Guid.NewGuid();
+    public int ClientCompanyId { get; private set; } = clientCompany.Id;
+    public int ConsultancyId { get; private set; }
     public string Name { get; private set; } = name;
     public string? Description { get; private set; }
     public FinancialData? FinancialData { get; private set; }
@@ -15,7 +17,7 @@ public class Project(string name, Company company, ProjectDates projectDates) : 
     public bool IsCompleted { get; private set; } = false;
 
     // navigational properties
-    public Company Company { get; set; } = company;
+    public Company ClientCompany { get; set; } = clientCompany;
 
     public void SetDescription(string description)
     {
@@ -25,6 +27,11 @@ public class Project(string name, Company company, ProjectDates projectDates) : 
     public void RenameProject(string newName)
     {
         Name = newName;
+    }
+
+    public void AddConsultancy(int id)
+    {
+        ConsultancyId = id;
     }
 
     public void SetFinancialData(FinancialData financialData)
