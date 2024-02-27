@@ -94,7 +94,7 @@ public class Employee(string firstName, string lastName, Company employerCompany
         {
             throw new Exception("There is no client company available");
         }
-        if (project.ClientCompany != ClientCompany.Id)
+        if (project.ClientCompanyId != ClientCompany.Id)
         {
             throw new Exception("The project is not available for the client company");
         }

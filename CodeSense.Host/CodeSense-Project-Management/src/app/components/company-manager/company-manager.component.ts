@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CreateClientCompany } from 'src/app/interfaces/messages/create-client-company';
-import { ClientCompanyClientService } from 'src/app/services/clientCompany/client-company-client.service';
+import { EUCountries } from 'src/app/enums/eu-countries';
+import { CreateCompanyCommand } from 'src/app/interfaces/commands/company/create-companyCommand';
+import { CompanyClientService } from 'src/app/services/company/company-client.service';
 
 @Component({
   selector: 'app-company-manager',
@@ -10,42 +11,60 @@ import { ClientCompanyClientService } from 'src/app/services/clientCompany/clien
 })
 export class CompanyManagerComponent {
 
-  myForm: FormGroup;
+  createCompanyForm: FormGroup;
+  countries = Object.values(EUCountries);
+  selectedCountry: EUCountries = EUCountries.BE;
 
-  constructor(private client: ClientCompanyClientService) {
-    this.myForm = new FormGroup({
+  constructor(private client: CompanyClientService) {
+    this.createCompanyForm = new FormGroup({
+      vatNumber: new FormControl(''),
       name: new FormControl(''),
-      primaryEmail: new FormControl(''),
-      primaryPhone: new FormControl(''),
+      contactData: new FormGroup({
+        primaryEmail: new FormControl(''),
+        primaryPhone: new FormControl('')
+      }),
       address: new FormGroup({
         street: new FormControl(''),
         city: new FormControl(''),
         state: new FormControl(''),
         zip: new FormControl(''),
-        country: new FormControl('')
-      })
+        country: new FormControl(this.selectedCountry) // Set the default country here
+      }),
+      isClient: new FormControl(false) 
     });
   }
+  
 
   onSubmit() {
-    const company = this.mapToRequest();
+    const command = this.mapToRequest();
 
-    this.client.
+    this.client.createCompany(command).subscribe(
+      () => {
+        console.log('Company created');
+      },
+      (error) => {
+        console.error('Error creating company', error);
+      }
+    );
 
   }
 
-  mapToRequest(): CreateClientCompany {
+  mapToRequest(): CreateCompanyCommand {
     return {
-      name: this.myForm.value.name,
-      primaryEmail: this.myForm.value.primaryEmail,
-      primaryPhone: this.myForm.value.primaryPhone,
+      vatNumber: this.createCompanyForm.value.vatNumber,
+      name: this.createCompanyForm.value.name,
+      contactData: {
+        primaryEmail: this.createCompanyForm.value.primaryEmail,
+        primaryPhone: this.createCompanyForm.value.primaryPhone
+      },
       address: {
-        street: this.myForm.value.address.street,
-        city: this.myForm.value.address.city,
-        state: this.myForm.value.address.state,
-        zip: this.myForm.value.address.zip,
-        country: this.myForm.value.address.country
-      }
+        street: this.createCompanyForm.value.address.street,
+        city: this.createCompanyForm.value.address.city,
+        state: this.createCompanyForm.value.address.state,
+        zipCode: this.createCompanyForm.value.address.zip,
+        country: this.createCompanyForm.value.address.country
+      },
+      isClient: this.createCompanyForm.value.isClient
     };
   }
 

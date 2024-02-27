@@ -33,7 +33,7 @@ public class AcceptProjectHandler(IRepository<Company> companyRepository) : IReq
         consultancy.QuoteAccepted(request.QuoteId);
         consultancy.AddProject(request.Project);
 
-        clientCompany.AddProject(request.Project);
+        clientCompany.AddEmployees(request.Project.Employees!);
 
         await _companyRepository.UpdateAsync(clientCompany);
         await _companyRepository.UpdateAsync(consultancy);

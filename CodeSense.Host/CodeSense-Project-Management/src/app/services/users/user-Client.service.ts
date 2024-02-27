@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { User } from '../../interfaces/user';
-import { CreateUserRequest } from 'src/app/interfaces/messages/create-user-request';
+import { User } from '../../interfaces/aggregates/user/user';
+import { CreateUserRequest } from 'src/app/interfaces/commands/user/create-user-request';
 import { BaseUrlService } from '../base/base-url.service';
 
 @Injectable({
