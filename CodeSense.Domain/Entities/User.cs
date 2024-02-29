@@ -3,21 +3,18 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class User : EntityBase
+public class User(UserContactData contactData, LoginData loginData, bool isAdmin) : EntityBase
 {
     public int? ClientCompanyId { get; private set; }
-    private UserContactData UserContactData { get; set; }
-    private LoginData LoginData { get; set; }
-    public bool IsAdmin { get; private set; }
+    private UserContactData UserContactData { get; set; } = contactData;
+    private LoginData LoginData { get; set; } = loginData;
+    public bool IsAdmin { get; private set; } = isAdmin;
 
     // navigational properties
     public Company ClientCompany { get; set; }
 
-    public User(UserContactData contactData, LoginData loginData, bool isAdmin)
+    public User() : this(new UserContactData(), new LoginData(string.Empty, string.Empty, false), false)
     {
-        UserContactData = contactData;
-        LoginData = loginData;
-        IsAdmin = isAdmin;
     }
 
     public string GetEmail()

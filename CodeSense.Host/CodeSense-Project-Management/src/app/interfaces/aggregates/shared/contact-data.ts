@@ -1,6 +1,6 @@
 export interface ContactData {
     primaryEmail: string;
-    primaryPhone: string;
+    primaryPhoneNumber: string;
     secondaryEmails?: string[];
     secondaryPhones?: string[];
 }

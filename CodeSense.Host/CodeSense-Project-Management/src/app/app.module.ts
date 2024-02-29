@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { ContactComponent } from './components/contact/contact.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterUserComponent } from './components/user/register-user/register-user.component';
 import { CompanyManagerComponent } from './components/company-manager/company-manager.component';
+import { AddressFormComponent } from './components/shared/address-form/address-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
@@ -26,7 +28,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         ContactComponent,
         NavbarComponent,
         RegisterUserComponent,
-        CompanyManagerComponent
+        CompanyManagerComponent,
+        AddressFormComponent
     ],
     providers: [
     provideAnimationsAsync()
@@ -41,7 +44,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         MatCardModule,
         MatInputModule,
         MatButtonModule,
-        MatSelectModule
+        MatSelectModule,
+        MatCheckboxModule,
     ]
 })
 export class AppModule { }

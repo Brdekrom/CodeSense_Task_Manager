@@ -2,7 +2,7 @@ import { Component, } from '@angular/core';
 import { UserClientService } from 'src/app/services/users/user-Client.service';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CreateUserRequest } from 'src/app/interfaces/commands/user/create-user-request';
+import { CreateUserCommand } from 'src/app/interfaces/commands/user/create-user-command';
 
 @Component({
   selector: 'app-register-user',
@@ -58,7 +58,7 @@ export class RegisterUserComponent {
     });
   }
 
-  mapToRequest(): CreateUserRequest {
+  mapToRequest(): CreateUserCommand {
     return {
       clientCompanyName: this.registerForm.value.companyName!,
       firstName: this.registerForm.value.firstName!,

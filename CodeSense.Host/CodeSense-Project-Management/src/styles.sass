@@ -18,3 +18,20 @@ body
 // Use the yellow color for elements with the .yellow-span class
 .yellow-span
   color: vars.$yellow
+
+  /* Custom scrollbar for WebKit-based browsers */
+::-webkit-scrollbar
+  width: 8px 
+
+
+::-webkit-scrollbar-track 
+  background: #f0f0f0
+
+
+::-webkit-scrollbar-thumb 
+  background: vars.$yellow
+  border-radius: 4px
+
+
+::-webkit-scrollbar-thumb:hover 
+  background: #a8a8a8

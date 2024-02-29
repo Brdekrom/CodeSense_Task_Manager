@@ -1,7 +1,7 @@
 <form [formGroup]="createCompanyForm" (ngSubmit)="onSubmit()">
-  <mat-card class="form-container">
+  <mat-card class="form-address-container">
     <mat-card-title>Company Information</mat-card-title>
-    <mat-card-content>
+    <mat-card-content class="card-content">
       <mat-form-field appearance="fill">
         <mat-label for="vatNumber">VAT Number</mat-label>
         <input matInput type="text" id="vatNumber" formControlName="vatNumber">
@@ -11,27 +11,35 @@
         <input matInput type="text" id="name" formControlName="name">
       </mat-form-field>
       <!-- Contact Data Group -->
-      <div formGroupName="contactData">
         <mat-form-field appearance="fill">
           <mat-label for="primaryEmail">Email</mat-label>
           <input matInput type="email" id="primaryEmail" formControlName="primaryEmail">
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label for="primaryPhone">Phone Number</mat-label>
-          <input matInput type="tel" id="primaryPhone" formControlName="primaryPhone">
+          <input matInput type="tel" id="primaryPhone" formControlName="primaryPhoneNumber">
         </mat-form-field>
-      </div>
+        <mat-checkbox formControlName="isClient">Client</mat-checkbox>
     </mat-card-content>
   </mat-card>
-
   <!-- Address Group -->
-  <mat-card class="form-container">
+  <mat-card class="form-address-container">
     <mat-card-title>Address</mat-card-title>
     <mat-card-content>
       <div formGroupName="address" class="input-fields">
         <mat-form-field appearance="fill">
           <mat-label for="street">Street</mat-label>
           <input matInput type="text" id="street" formControlName="street">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="street">House number</mat-label>
+          <input matInput type="text" id="houseNumber" formControlName="houseNumber">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="street">Box</mat-label>
+          <input matInput type="text" id="box" formControlName="box">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -56,12 +64,13 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      <div class="submit-button-container">
-        <button mat-raised-button type="submit" [disabled]="!createCompanyForm.valid">Submit</button>
-      </div>
+        <div class="submit-button-container">
+          <button mat-raised-button type="submit" [disabled]="!createCompanyForm.valid">Submit</button>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
+  
 
 
 

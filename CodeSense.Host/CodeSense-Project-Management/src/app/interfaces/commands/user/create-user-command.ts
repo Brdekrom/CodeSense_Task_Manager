@@ -1,4 +1,4 @@
-export interface CreateUserRequest {
+export interface CreateUserCommand {
     clientCompanyName: string;
     firstName: string;
     lastName: string;

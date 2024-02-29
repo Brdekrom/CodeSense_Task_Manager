@@ -10,6 +10,10 @@ public class ProjectQuote(Project project, int consultancyId, int clientCompanyI
     public bool IsDue { get => IsAccepted || CreatedAt.AddHours(48) < DateTime.Now; }
     public Project Project { get; } = project;
 
+    public ProjectQuote() : this(new Project(), 0, 0)
+    {
+    }
+
     public void AcceptQuote()
     {
         IsAccepted = true;

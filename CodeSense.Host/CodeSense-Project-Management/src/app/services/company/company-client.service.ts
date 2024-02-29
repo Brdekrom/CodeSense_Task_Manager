@@ -1,15 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateCompanyCommand } from 'src/app/interfaces/commands/company/create-companyCommand';
+import { CreateCompanyCommand } from 'src/app/interfaces/commands/company/create-company-command';
+import { BaseUrlService } from '../base/base-url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyClientService {
 
-  constructor(private httpClient: HttpClient) { }
+  url = this.baseUrl.getBaseUrl() + '/company';
+  constructor(private httpClient: HttpClient, private baseUrl: BaseUrlService) 
+  {
+    
+   }
+
 
   createCompany(command : CreateCompanyCommand) {
-    return this.httpClient.post('/company', command);
+    return this.httpClient.post(this.url, command);
   }
 }

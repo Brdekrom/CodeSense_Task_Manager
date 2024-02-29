@@ -1,4 +1,5 @@
 ﻿using CodeSense.Domain.Abstractions;
+using CodeSense.Domain.Enums;
 using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
@@ -8,6 +9,7 @@ public class Company(string vatNumber, string name, ContactData contactData, Add
     public string VATNumber { get; private set; } = vatNumber;
     public string Name { get; private set; } = name;
     public ContactData ContactData { get; private set; } = contactData;
+    public int MainAddressId { get; private set; }
     public Address MainAddress { get; private set; } = address;
     public FinancialData? FinancialData { get; private set; }
     public ICollection<Address> Addresses { get; private set; } = new List<Address>();
@@ -16,6 +18,10 @@ public class Company(string vatNumber, string name, ContactData contactData, Add
     public ICollection<Project>? Projects { get; private set; }
     public ICollection<ProjectQuote>? ProjectQuotes { get; private set; }
     public bool IsClient { get; private set; } = IsClient;
+
+    public Company() : this(string.Empty, string.Empty, new ContactData(string.Empty, string.Empty), new Address(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, EUCountries.BE), false)
+    {
+    }
 
     public void UpdateName(string name)
     {

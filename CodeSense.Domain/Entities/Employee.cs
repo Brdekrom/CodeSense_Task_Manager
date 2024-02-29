@@ -4,13 +4,21 @@ using CodeSense.Domain.ValueObjects;
 
 namespace CodeSense.Domain.Entities;
 
-public class Employee(string firstName, string lastName, Company employerCompany, ContactData contactData, EmployeeLevel employeeLevel, EmployeeFinancialData employeeFinancialData) : EntityBase
+public class Employee(
+    string firstName,
+    string lastName,
+    Company employerCompany,
+    ContactData contactData,
+    EmployeeLevel employeeLevel,
+    EmployeeFinancialData employeeFinancialData) : EntityBase
 {
     public int? ProjectId { get; private set; }
+    public int EmployerCompanyId { get; set; } = employerCompany.Id;
+    public int? ClientCompanyId { get; private set; }
     public string FirstName { get; private set; } = firstName;
     public string LastName { get; private set; } = lastName;
     public ContactData? ContactData { get; private set; } = contactData;
-    public Company? EmployerCompany { get; private set; } = employerCompany;
+    public Company EmployerCompany { get; private set; } = employerCompany;
     public EmployeeLevel Level { get; private set; } = employeeLevel;
     public EmployeeFinancialData? FinancialData { get; private set; } = employeeFinancialData;
     public Company? ClientCompany { get; private set; }
@@ -19,8 +27,13 @@ public class Employee(string firstName, string lastName, Company employerCompany
     // navigational properties
     public Project? Project { get; private set; }
 
+    public Employee() : this(string.Empty, string.Empty, new Company(), new ContactData(string.Empty, string.Empty), EmployeeLevel.Junior, new EmployeeFinancialData(0))
+    {
+    }
+
     public void SetClientCompany(Company clientCompany)
     {
+        ClientCompanyId = clientCompany.Id;
         ClientCompany = clientCompany;
     }
 
@@ -53,7 +66,7 @@ public class Employee(string firstName, string lastName, Company employerCompany
             throw new Exception("The price cannot be lower than the daily salary");
         }
 
-        FinancialData = FinancialData with { DailyIncome = price };
+        FinancialData = FinancialData with { DailyRate = price };
 
         return price;
     }
@@ -72,7 +85,7 @@ public class Employee(string firstName, string lastName, Company employerCompany
             throw new Exception("The price cannot be lower than the daily salary");
         }
 
-        FinancialData = FinancialData with { DailyIncome = dailyIncome };
+        FinancialData = FinancialData with { DailyRate = dailyIncome };
 
         return (int)dailyIncome;
     }

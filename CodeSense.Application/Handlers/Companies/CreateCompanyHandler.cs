@@ -20,6 +20,7 @@ public class CreateCompanyHandler(IRepository<Company> repository) : IRequestHan
 
     public async Task<Company> Handle(CreateCompanyCommand request, CancellationToken cancellationToken)
     {
+        var country = request.Address.Country;
         var mappedCompany = new Company(request.VatNumber, request.Name, request.ContactData, request.Address, request.IsClient);
 
         var company = await _repository.CreateAsync(mappedCompany);

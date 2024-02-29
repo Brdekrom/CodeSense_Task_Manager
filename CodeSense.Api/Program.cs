@@ -3,15 +3,21 @@ using CodeSense.Application.Handlers.Users.Commands;
 using CodeSense.Application.Settings;
 using CodeSense.Domain;
 using CodeSense.Infrastructure;
-using CodeSense.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 var jwtSettingsSection = builder.Configuration.GetSection("Jwt");
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 builder.Services.Configure<JwtSettings>(jwtSettingsSection);
+
+var connectionString = builder.Configuration.GetConnectionString("CsConnectionString");
+builder.Services.AddInfrastructureServices(connectionString);
 
 builder.Services.AddCors(options =>
 {
@@ -36,24 +42,19 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddControllers();
-builder.Services.AddInfrastructureServices();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddDomainLayer();
 builder.Services.AddApplicationServices();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateUserCommandHandler).Assembly));
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "CodeSense.Api", Version = "v1" });
-});
-
-var connectionString = builder.Configuration.GetConnectionString("CsConnectionString");
-
-builder.Services.AddDbContext<CodeSenseDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CsConnectionString"));
 });
 
 var app = builder.Build();

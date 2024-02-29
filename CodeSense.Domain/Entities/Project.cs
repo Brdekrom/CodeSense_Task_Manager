@@ -19,6 +19,10 @@ public class Project(string name, Company clientCompany, ProjectDates projectDat
     // navigational properties
     public Company ClientCompany { get; set; } = clientCompany;
 
+    public Project() : this(string.Empty, new Company(), new ProjectDates(DateOnly.FromDateTime(DateTime.Today), DateOnly.FromDateTime(DateTime.Today)))
+    {
+    }
+
     public void SetDescription(string description)
     {
         Description = description;

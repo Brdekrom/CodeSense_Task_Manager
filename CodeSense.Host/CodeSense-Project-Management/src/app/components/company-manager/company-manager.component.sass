@@ -4,13 +4,17 @@ mat-card
 
 mat-card-title
   color: black
+  display: flex
+  justify-content: center
+  margin-bottom: 10px
   
 .submit-button-container
   display: flex
   justify-content: flex-end
 
-.form-container, .input-fields
+.input-fields, .card-content
     display: flex
-    flex-direction: column
+    flex-direction: row
+    flex-wrap: wrap
     align-items: center
-    justify-content: center
+    justify-content: space-around
