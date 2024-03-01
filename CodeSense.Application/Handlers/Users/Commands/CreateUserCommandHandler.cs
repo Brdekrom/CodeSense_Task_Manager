@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CodeSense.Application.Abstractions;
+﻿using CodeSense.Application.Abstractions;
 using CodeSense.Domain.Entities;
 using CodeSense.Domain.Validators;
 using CodeSense.Domain.ValueObjects;
@@ -15,7 +14,7 @@ public class CreateUserCommand : IRequest<int>
     public bool IsAdmin { get; set; }
 }
 
-public class CreateUserCommandHandler(IRepository<User> userService, IMapper mapper) : IRequestHandler<CreateUserCommand, int>
+public class CreateUserCommandHandler(IRepository<User> userService) : IRequestHandler<CreateUserCommand, int>
 {
     private readonly IRepository<User> _userService = userService;
 

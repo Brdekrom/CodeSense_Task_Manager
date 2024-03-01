@@ -4,6 +4,7 @@ using CodeSense.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeSense.Infrastructure.Migrations
 {
     [DbContext(typeof(CodeSenseDbContext))]
-    partial class CodeSenseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240301143939_ChangesToDDD")]
+    partial class ChangesToDDD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
