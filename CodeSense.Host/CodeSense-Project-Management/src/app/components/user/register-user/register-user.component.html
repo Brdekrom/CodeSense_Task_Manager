@@ -1,50 +1,59 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-    <label for="firstName">First Name:</label>
-    <input id="firstName" type="text" formControlName="firstName">
-
-    <label for="lastName">Last Name:</label>
-    <input id="lastName" type="text" formControlName="lastName">
-
-    <label for="lastName">Phone Number:</label>
-    <input id="lastName" type="text" formControlName="phone">
-
-    
-    <label for="password">Company: TODO: This will be a dropdown menu</label>
-    <input id="companyName" type="companyName" formControlName="companyName">
-
-    <label for="email">Email: @if(registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched){
-        <span class="error">
-            Please enter a valid email address.
-        </span>
-        }</label>
-
-    <input id="email" type="email" formControlName="email">
-
-
-    <label for="password">Password:</label>
-    <input id="password" type="password" formControlName="password">
-
-    <label for="confirmPassword">Confirm Password: @if(registerForm.get('confirmPassword') !=
-        registerForm.get('password') && registerForm.get('confirmPassword')?.touched){
-        <span class="error">
-            Passwords do not match.
-        </span>
-        }</label>
-    <input id="confirmPassword" type="password" formControlName="confirmPassword">
-
-
-
-    <button type="submit" [disabled]="!registerForm.valid ">Register</button>
-</form>
-
-@if(successMessage){
-<div class="alert alert-success">
-    {{successMessage}}
-</div>
-}
-@else if(errorMessage){
-<div class="alert alert-danger">
-    {{errorMessage}}
-</div>
-}
+<mat-card class="mat-card-container">
+    <mat-card-header>
+      <mat-card-title>Registration Form</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
+  
+        <mat-form-field appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput id="firstName" type="text" formControlName="firstName">
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput id="lastName" type="text" formControlName="lastName">
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <input matInput id="phone" type="text" formControlName="phone">
+        </mat-form-field>
+  
+        <!-- Company Dropdown TODO: Change to <mat-select> later -->
+        <mat-form-field appearance="fill">
+          <mat-label>Company</mat-label>
+          <input matInput id="companyName" type="text" formControlName="companyName">
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput id="email" type="email" formControlName="email">
+          <!-- Place error handling for email here -->
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput id="password" type="password" formControlName="password">
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput id="confirmPassword" type="password" formControlName="confirmPassword">
+          <!-- Place error handling for password confirmation here -->
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Register</button>
+      </form>
+    </mat-card-content>
+    <!-- Success and Error messages -->
+    <mat-card-actions>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{successMessage}}
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+    </mat-card-actions>
+  </mat-card>
+  
